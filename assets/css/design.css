@@ -1,0 +1,185 @@
+/* montserrat-300 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src: local(''),
+         url('../fonts/montserrat-v15-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/montserrat-v15-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-regular - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('../fonts/montserrat-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('../fonts/montserrat-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-600 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+        url('../fonts/montserrat-v15-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('../fonts/montserrat-v15-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    background: url('../images/bg.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#main {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#heading {
+    position: fixed;
+}
+
+h1 {
+    margin: 0 3rem;
+    text-align: center;
+    color: #eb1536;
+    font-size: 6.25rem;
+}
+
+h1 span {
+    color: #fff;
+    font-size: 20px;
+    display: block;
+    letter-spacing: .375rem;
+}
+
+.caption {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sep {
+    height: 1px;
+    width: 100%;
+    background: #fff;
+    flex: 1 1 auto;
+}
+
+#middle {
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin: 0 2rem;
+    flex: 0;
+    white-space: nowrap;
+    font-weight: 300;
+}
+
+#arrow-down {
+    position: absolute;
+    bottom: .625rem;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255,255,255,0.5);
+}
+
+#arrow-down:hover {
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.section {
+    padding: 5rem;
+    width: 100%;
+    background: rgba(52,51,50,.95); /*#343332*/
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section.light {
+    background: rgba(64,61,57,.95); /*#403d39;*/
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 3rem;
+}
+
+h5 {
+    font-weight: 300;
+    letter-spacing: .25rem;
+}
+
+.section p {
+    line-height: 2;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col {
+    padding: 2rem;
+    width: 100%;
+    font-size: .9rem;
+}
+
+.section-sep {
+    height: 2px;
+    width: 6.25rem;
+    background: #eb1536;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .section {
+        width: 75%;
+    }
+
+    .col {
+        width: 40%;
+    }
+}
