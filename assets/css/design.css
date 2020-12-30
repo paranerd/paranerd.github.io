@@ -42,10 +42,15 @@ body {
     background-position: center;
 }
 
+* , *:before, *:after{ 
+    box-sizing: border-box; 
+}
+
 #main {
     position: relative;
     top: 0;
     left: 0;
+    padding: 3rem;
     height: 100%;
     width: 100%;
     display: flex;
@@ -78,6 +83,7 @@ h1 span {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 2rem;
 }
 
 .sep {
@@ -125,7 +131,7 @@ h1 span {
 }
 
 .section {
-    padding: 5rem;
+    padding: 5rem 1rem;
     width: 100%;
     background: rgba(52,51,50,.95); /*#343332*/
     text-align: center;
@@ -176,6 +182,7 @@ h5 {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .section {
+        padding: 5rem 5rem;
         width: 75%;
     }
 
