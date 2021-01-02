@@ -6,6 +6,7 @@ const height = main.offsetHeight;
 
 window.addEventListener('scroll', (e) => {
     heading.style.opacity = 1 - window.scrollY / (height / 2);
+    heading.style.marginTop = -window.scrollY / 2 + "px";
 });
 
 arrowDown.addEventListener('click', (e) => {
