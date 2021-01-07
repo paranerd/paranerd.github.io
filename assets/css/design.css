@@ -381,6 +381,13 @@ h3 a {
     margin: 0 10px;
 }
 
+.footer-legal {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .footer-communication {
     margin-top: 1rem;
     width: 100%;
