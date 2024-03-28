@@ -1,3 +1,5 @@
+$highlight-color: #eb1536;
+
 /* montserrat-300 - latin */
 @font-face {
   font-family: 'Montserrat';
@@ -37,8 +39,6 @@ body {
 
 body {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  /*display: flex;
-  flex-direction: column;*/
 }
 
 #page-bg {
@@ -86,7 +86,7 @@ form button {
   margin-top: 20px;
   height: 60px;
   width: 100%;
-  background: #eb1536;
+  background: $highlight-color;
   color: #fff;
   border: none;
   font-size: 1rem;
@@ -97,7 +97,7 @@ form button {
 }
 
 form button:hover {
-  color: #eb1536;
+  color: $highlight-color;
   background: #fff;
 }
 
@@ -131,7 +131,7 @@ form button:hover {
   }
 
   .masthead-title {
-    color: #eb1536;
+    color: $highlight-color;
   }
 
   .masthead-subtitle {
@@ -180,7 +180,7 @@ form button:hover {
   }
 
   .masthead-title {
-    color: #eb1536;
+    color: $highlight-color;
   }
 
   .masthead-subtitle {
@@ -296,7 +296,7 @@ h5 {
 .section-sep {
   height: 2px;
   width: 6.25rem;
-  background: #eb1536;
+  background: $highlight-color;
 }
 
 .cards {
@@ -318,11 +318,11 @@ h3 {
   font-size: 1.5rem;
   line-height: 1.21;
   font-weight: 600;
-  color: #eb1536 !important;
+  color: $highlight-color !important;
 }
 
 h3 a {
-  color: #eb1536 !important;
+  color: $highlight-color !important;
 }
 
 .card-icon-wrapper {
@@ -343,7 +343,7 @@ h3 a {
   border-color: #555c6e;
   border-width: 0px;
   border-radius: 50%;
-  background-color: #eb1536;
+  background-color: $highlight-color;
   line-height: 56px;
   color: #fff;
   font-size: 1.75rem;
@@ -391,13 +391,13 @@ h3 a {
 .skill-bar-actual {
   position: absolute;
   height: 100%;
-  background: #eb1536;
+  background: $highlight-color;
   transition: width 1.5s;
   width: 0%;
 }
 
 .quote-icon {
-  color: #eb1536;
+  color: $highlight-color;
 
   svg {
     height: 100px;
@@ -486,8 +486,8 @@ header {
 
       &:hover,
       &.active {
-        color: #eb1536;
-        border-color: #eb1536;
+        color: $highlight-color;
+        border-color: $highlight-color;
       }
     }
 
@@ -536,6 +536,94 @@ footer {
 
   a {
     margin: 0 10px;
+  }
+}
+
+/* Posts */
+
+#posts {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+.post {
+  margin-bottom: 30px;
+}
+
+.post-img-wrapper {
+  display: flex;
+}
+
+.post-img {
+  width: 320px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.post-title-summary-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #a07a61;
+  letter-spacing: 1px;
+}
+
+.post-summary {
+  font-size: 14px;
+  line-height: 2;
+}
+
+.post-info {
+  margin-top: 25px;
+  font-size: 12px;
+}
+
+/* Pagination */
+
+.pagination {
+  margin-bottom: 30px;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-item {
+  margin-right: 5px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a07a61;
+  cursor: default;
+
+  &.active {
+    color: #fff;
+    background-color: $highlight-color;
+  }
+
+  &:hover:not(.disabled) {
+    color: #fff;
+    background-color: $highlight-color;
+    cursor: pointer;
+  }
+
+  a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -588,34 +676,8 @@ footer {
   opacity: 0.05;
 }
 
-#posts {
-  margin: 0 auto;
-  max-width: 1170px;
-}
-
-#post {
-  margin-bottom: 65px;
-}
-
 main {
   padding: 100px 30px 0 30px;
   width: 100%;
   flex: 1;
-}
-
-.post-title {
-  margin-top: 0;
-  margin-bottom: 25px;
-  font-size: 28px;
-  color: #a07a61;
-  letter-spacing: 1px;
-}
-
-#summary {
-  font-size: 14px;
-  line-height: 2;
-}
-
-#info {
-  font-size: 12px;
 }

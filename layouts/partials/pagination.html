@@ -1,0 +1,55 @@
+{{ $pag := .paginator }}
+
+<!-- Number of links either side of the current page. -->
+{{ $adjacent_links := 1 }}
+
+{{ if gt $pag.TotalPages 1 }}
+  {{ $.Scratch.Set "dot_rendered" false }}
+  <nav aria-label="page navigation">
+    <ul class="pagination">
+      <!-- Previous page -->
+      {{ if $pag.HasPrev  }}
+        <li class="page-item"><a href="{{ $pag.Prev.URL }}" rel="prev" class="page-link">&#8249;</a></li>
+      {{ end }}
+
+      {{ range $pag.Pagers }}
+        <!-- Current page -->
+        {{ if eq . $pag }}
+          <li class="page-item active">
+            <span>{{ .PageNumber }}</span>
+          </li>
+        <!-- Adjacent pages -->
+        {{ else if and (ge .PageNumber (sub $pag.PageNumber $adjacent_links)) (le .PageNumber (add $pag.PageNumber $adjacent_links)) }}
+          <li class="page-item">
+            <a href="{{ .URL }}" class="page-link">{{ .PageNumber }}</a>
+          </li>
+        <!-- First page -->
+        {{ else if and (eq .PageNumber 1) (gt $pag.PageNumber (add $adjacent_links 1)) }}
+          <li class="page-item"><a href="{{ $pag.First.URL }}" rel="last" class="page-link">{{ .PageNumber }}</a></li>
+        <!-- Last page -->
+        {{ else if and (eq .PageNumber $pag.TotalPages) (lt $pag.PageNumber (sub $pag.TotalPages $adjacent_links)) }}
+          <li class="page-item"><a href="{{ $pag.Last.URL }}" rel="last" class="page-link">{{ $pag.TotalPages }}</a></li>
+        <!-- Second page or dots -->
+        {{ else if eq .PageNumber 2 }}
+          {{ if gt $pag.PageNumber (add 2 $adjacent_links 1) }}
+            <li class="page-item disabled"><span>...</span></li>
+          {{ else }}
+            <li class="page-item"><a href="{{ .URL }}" rel="last" class="page-link">{{ .PageNumber }}</a></li>
+          {{ end }}
+        <!-- Second to last page -->
+        {{ else if (eq .PageNumber (sub $pag.TotalPages 1)) }}
+          {{ if lt $pag.PageNumber (sub $pag.TotalPages 1 $adjacent_links 1) }}
+            <li class="page-item disabled"><span>...</span></li>
+          {{ else }}
+            <li class="page-item"><a href="{{ .URL }}" rel="last" class="page-link">{{ sub $pag.TotalPages 1 }}</a></li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      <!-- Next page -->
+      {{ if $pag.HasNext }}
+      <li class="page-item"><a href="{{ $pag.Next.URL }}" rel="next" class="page-link">&#8250;</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+{{ end }}

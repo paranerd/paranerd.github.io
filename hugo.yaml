@@ -2,3 +2,5 @@ baseURL: 'https://thegermancoder.com/'
 languageCode: 'en-us'
 title: 'The German Coder'
 sectionPagesMenu: main
+summaryLength: 50
+paginate: 2
