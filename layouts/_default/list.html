@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="{{ .Site.BaseURL }}" />
+    <title>Blog</title>
+
+    <!-- Styles -->
+    {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }} {{
+    with resources.Get "css/style.scss" | toCSS $opts | minify | fingerprint }}
+    <link
+      rel="stylesheet"
+      href="{{ .RelPermalink }}"
+      integrity="{{ .Data.Integrity }}"
+      crossorigin="anonymous"
+    />
+    {{ end }}
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-114x114.png" />
+    <link rel="icon" sizes="192x192" href="/favicon-57x57.png" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>List page</h1>
+      <!--<div id="header-cover"></div>-->
+    </div>
+
+    <main>
+      <div id="posts">
+        {{ range .Pages }}
+        <div id="post">
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p id="summary">{{ .Summary }}</p>
+          <hr />
+          <div id="info">
+            {{ $format := "Jan 2, 2006" }} By {{ .Params.author }} | {{
+            .Params.date.Format $format }}
+          </div>
+          <hr />
+        </div>
+        {{ end }}
+      </div>
+    </main>
+    {{ partial "footer" . }}
+  </body>
+</html>

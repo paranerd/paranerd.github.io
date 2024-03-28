@@ -1,40 +1,58 @@
-const main = document.getElementById('main');
-const heading = document.getElementById('heading');
-const arrowDown = document.getElementById('arrow-down');
-const body = document.getElementById('main');
-const height = main.offsetHeight;
-const skillBars = document.getElementsByClassName('skill-bar');
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    const header = document.getElementsByTagName('header')[0];
+    const mastheadHomepage = document.getElementById('masthead-homepage');
+    const arrowDown = document.getElementById('arrow-down');
+    const skillBars = document.getElementsByClassName('skill-bar');
 
-window.addEventListener('scroll', (e) => {
-    heading.style.opacity = 1 - window.scrollY / (height / 2);
-    heading.style.marginTop = -window.scrollY / 2 + "px";
+    window.addEventListener('scroll', (e) => {
+      if (mastheadHomepage) {
+        mastheadHomepage.style.opacity =
+          1 - window.scrollY / (window.innerHeight / 2);
+        mastheadHomepage.style.marginTop = -window.scrollY / 2 + 'px';
+      }
 
-    for (let bar of skillBars) {
-        if (isInViewport(bar)) {
+      if (window.scrollY > 0) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      if (skillBars) {
+        for (let bar of skillBars) {
+          if (isInViewport(bar)) {
             setTimeout(() => {
-                const actualSkill = bar.getElementsByClassName('skill-bar-actual')[0]
-                actualSkill.style.width = actualSkill.style.maxWidth;
+              const actualSkill =
+                bar.getElementsByClassName('skill-bar-actual')[0];
+              actualSkill.style.width = actualSkill.style.maxWidth;
             }, 500);
+          }
         }
-    };
-});
-
-arrowDown.addEventListener('click', (e) => {
-    window.scroll({
-        top: height,
-        left: 0,
-        behavior: "smooth",
+      }
     });
-});
 
-function isInViewport(elem) {
-    const rect  = elem.getBoundingClientRect();
-    const html = document.documentElement;
+    if (arrowDown) {
+      arrowDown.addEventListener('click', (e) => {
+        window.scroll({
+          top: window.innerHeight,
+          left: 0,
+          behavior: 'smooth',
+        });
+      });
+    }
 
-    return (
+    function isInViewport(elem) {
+      const rect = elem.getBoundingClientRect();
+      const html = document.documentElement;
+
+      return (
         rect.top < (window.innerHeight || html.clientHeight) &&
         rect.bottom > 0 &&
         rect.left < (window.innerWidth || html.clientWidth) &&
         rect.right > 0
-    );
-}
+      );
+    }
+  },
+  false
+);

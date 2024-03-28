@@ -1,0 +1,20 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<base href="{{ .Site.BaseURL }}" />
+
+<title>
+  {{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title
+  site.Title }}{{ end }}
+</title>
+
+<!-- Load CSS -->
+{{ partialCached "head/css.html" . }}
+
+<!-- Load JS -->
+{{ partialCached "head/js.html" . }}
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-114x114.png" />
+<link rel="icon" sizes="192x192" href="/favicon-57x57.png" />
