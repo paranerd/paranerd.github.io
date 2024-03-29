@@ -6,7 +6,7 @@ document.addEventListener(
     const arrowDown = document.getElementById('arrow-down');
     const skillBars = document.getElementsByClassName('skill-bar');
 
-    window.addEventListener('scroll', (e) => {
+    window.addEventListener('scroll', () => {
       if (mastheadHomepage) {
         mastheadHomepage.style.opacity =
           1 - window.scrollY / (window.innerHeight / 2);
@@ -33,7 +33,7 @@ document.addEventListener(
     });
 
     if (arrowDown) {
-      arrowDown.addEventListener('click', (e) => {
+      arrowDown.addEventListener('click', () => {
         window.scroll({
           top: window.innerHeight,
           left: 0,
@@ -53,6 +53,11 @@ document.addEventListener(
         rect.right > 0
       );
     }
+
+    document.getElementById('nav-icon').addEventListener('click', (e) => {
+      document.getElementById('nav-icon').classList.toggle('open');
+      document.getElementById('flyout').classList.toggle('open');
+    });
   },
   false
 );

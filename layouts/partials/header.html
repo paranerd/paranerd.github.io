@@ -1,9 +1,36 @@
 <header>
   <div id="header-logo">
-    <img src="/img/logo.png" alt="" />
+    <a href="/"><img src="/img/logo.png" alt="" /></a>
   </div>
 
-  <div id="header-menu">
+  <div id="flyout">
+    <ul>
+      <li>
+        <a class='{{ if eq .Page.RelPermalink "/" }}active{{ end }}' href="/">Home</a>
+      </li>
+      <li>
+        <a class='{{ if hasPrefix .Page.RelPermalink "/blog" }}active{{ end }}' href="/blog">Blog</a>
+      </li>
+      <li>
+        <a class='{{ if hasPrefix .Page.RelPermalink "/projects" }}active{{ end }}' href="/projects">Projects</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="header-menu-flyout">
+    <ul>
+      <li>
+        <div id="nav-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="header-menu-main">
     <ul>
       <li>
         <a class='{{ if eq .Page.RelPermalink "/" }}active{{ end }}' href="/"

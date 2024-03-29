@@ -2,28 +2,38 @@
 
 <!-- Masthead -->
 {{ $image := .Resources.Get "header.jpg" }}
-<div id="the-top" style="background-image: url('{{ $image.RelPermalink }}')">
+<div id="masthead-section" style="background-image: url('{{ $image.RelPermalink }}')">
   <h1>{{ .Title }}</h1>
 
   <div id="masthead-darkener"></div>
 </div>
 
 <main>
+  <!-- Posts -->
   <div id="posts">
     {{ $paginator := .Paginate (where .Pages "Type" "blog")}}
     {{ range $paginator.Pages }}
     <div class="post">
-      <div class="post-img-wrapper">
-      {{ with .Resources.GetMatch "header.jpg" }}
-      <div class="post-img">
-        <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}" width="302" height="202">
+      <div class="post-content-wrapper">
+        <!-- Post image -->
+        <div class="post-img-wrapper">
+          {{ with .Resources.GetMatch "header.jpg" }}
+          <div class="post-img">
+            <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
+          </div>
+          {{ end }}
+        </div>
+
+        <div class="post-title-summary-wrapper">
+          <!-- Post title -->
+          <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+          <!-- Post summary -->
+          <span class="post-summary">{{ .Summary }}</span>
+        </div>
       </div>
-      {{ end }}
-      <div class="post-title-summary-wrapper">
-      <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <span class="post-summary">{{ .Summary }}</span>
-    </div>
-    </div>
+
+      <!-- Post info -->
       <div class="post-info">
         <hr />
         {{ $format := "Jan 2, 2006" }} By {{ .Params.author }} | {{
