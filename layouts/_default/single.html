@@ -1,34 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ .Title }}</title>
+{{ define "main" }}
+<!-- Masthead -->
+{{ $image := .Resources.Get "header.jpg" }}
+<div id="masthead-section" style="background-image: url('{{ $image.RelPermalink }}')">
+  <h1>{{ .Title }}</h1>
 
-    <!-- Styles -->
-    {{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }} {{
-    with resources.Get "css/style.scss" | toCSS $opts | minify | fingerprint }}
-    <link
-      rel="stylesheet"
-      href="{{ .RelPermalink }}"
-      integrity="{{ .Data.Integrity }}"
-      crossorigin="anonymous"
-    />
-    {{ end }}
+  <div id="masthead-darkener"></div>
+</div>
 
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-114x114.png" />
-    <link rel="icon" sizes="192x192" href="/favicon-57x57.png" />
-  </head>
-  <body>
-    <div id="header">
-      <h1>{{ .Title }}</h1>
-      <div id="header-cover"></div>
+<main>
+  <div class="content single-post">
+    <!-- Post content -->
+    <div class="post-content">
+      <!-- Paginator -->
+      <div>
+        <hr>
+        <div class="post-nav">
+          <!-- Previous -->
+          {{ with .PrevInSection }}
+            <span class="prev-arrow">&#8249;</span>
+            <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
+          {{ end }}
+          <!-- Next -->
+          {{ with .NextInSection }}
+          <span class="spacer"></span>
+            <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
+            <span class="next-arrow">&#8250;</span>
+          {{ end }}
+        </div>
+        <hr>
+      </div>
+
+      <!-- Table of Contents -->
+      {{ if .Params.toc }}
+      <aside class="toc-sm">
+        <h3>Table of Contents</h3>
+        {{ .TableOfContents }}
+      </aside>
+      {{ end }}
+
+      <!-- Content -->
+      {{ .Content }}
     </div>
 
-    <main>
-      <div id="post">{{ .Content }}</div>
-    </main>
-  </body>
-</html>
+    <!-- Table of Contents -->
+    {{ if .Params.toc }}
+    <aside class="toc-lg">
+      <h3>Table of Contents</h3>
+      {{ .TableOfContents }}
+    </aside>
+    {{ end }}
+  </div>
+</main>
+{{ end }}
