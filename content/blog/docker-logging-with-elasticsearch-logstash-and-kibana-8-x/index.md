@@ -3,6 +3,7 @@ title: 'Docker Logging With Elasticsearch Logstash and Kibana 8.x'
 date: 2023-06-02T19:42:03+01:00
 draft: false
 author: paranerd
+toc: true
 ---
 
 The [ELK-Stack](https://www.elastic.co/what-is/elk-stack) is one of the most popular logging platforms. It is flexible, well integrated and most of
@@ -24,7 +25,7 @@ examples to work with a single node, instead.
 
 First, we need to set some environment variables:
 
-```bash
+```bash { linenos=table }
 # Password for the 'elastic' user (>= 6 characters)
 ELASTIC_PASSWORD=pass
 
@@ -60,7 +61,7 @@ makes things a lot easier so we’re going to stick with it.
 
 Next up is the „meat“ of it all: the `docker-compose.yaml`
 
-```yaml
+```yaml { linenos=table }
 services:
   setup:
     image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
@@ -271,7 +272,7 @@ In the folder where your ‚docker-compose.yaml‘ resides, create two folders:
 
 We’re going to configure the `agent` in `logstash/agent/logstash.conf`:
 
-```
+```bash { linenos=table }
 input {
     gelf {
         port => 12201
@@ -301,7 +302,7 @@ The above is telling this Logstash instance to listen on port 12201 and output e
 
 Next up is `central` in `logstash/central/logstash.conf`:
 
-```
+```bash { linenos=table }
 input {
   redis {
     host => "redis"
@@ -407,7 +408,7 @@ as-is because we’re accessing the `ELASTICSEARCH_USERNAME` and
 
 With that done we can simply run
 
-```bash
+```bash { linenos=table }
 docker compose up -d
 ```
 
@@ -427,7 +428,7 @@ Sending logs from Docker to a remote server is really simple. I’ll show you 2 
 Adding the following to any `docker-compose.yaml` will result in the logs being sent to the remote
 logging server only for that particular container:
 
-```yaml
+```yaml { linenos=table }
 logging:
   driver: gelf
   options:
@@ -445,7 +446,7 @@ logs, adding the snippet to all compose files would be very cumbersome. To make 
 simply add the following to `/etc/docker/daemon.json` (you may have to create this file if it doesn’t exist,
 yet):
 
-```json
+```json { linenos=table }
 "log-driver": "gelf",
 "log-opts": {
   "gelf-address": "udp://[ip of your logging server]:12201"
@@ -454,7 +455,7 @@ yet):
 
 Restart your docker daemon:
 
-```bash
+```bash { linenos=table }
 service docker restart
 ```
 

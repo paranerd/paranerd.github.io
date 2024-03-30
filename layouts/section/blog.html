@@ -10,7 +10,7 @@
 
 <main>
   <!-- Posts -->
-  <div id="posts">
+  <div class="content">
     {{ $paginator := .Paginate (where .Pages "Type" "blog")}}
     {{ range $paginator.Pages }}
     <div class="post">

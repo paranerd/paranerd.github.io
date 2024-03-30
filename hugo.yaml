@@ -4,3 +4,8 @@ title: 'The German Coder'
 sectionPagesMenu: main
 summaryLength: 50
 paginate: 2
+markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+    ordered: false
