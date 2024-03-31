@@ -40,6 +40,25 @@
 
       <!-- Content -->
       {{ .Content }}
+
+      <!-- Paginator -->
+      <div>
+        <hr>
+        <div class="post-nav">
+          <!-- Previous -->
+          {{ with .PrevInSection }}
+            <span class="prev-arrow">&#8249;</span>
+            <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
+          {{ end }}
+          <!-- Next -->
+          {{ with .NextInSection }}
+          <span class="spacer"></span>
+            <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
+            <span class="next-arrow">&#8250;</span>
+          {{ end }}
+        </div>
+        <hr>
+      </div>
     </div>
 
     <!-- Table of Contents -->
