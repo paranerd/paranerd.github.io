@@ -40,6 +40,8 @@ body {
 
 body {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 #page-bg {
@@ -66,6 +68,7 @@ input {
   width: 100%;
   line-height: 2;
   border: 1px solid #ccc;
+  outline: none;
   /*font-family: 'Montserrat', Arial, Helvetica, sans-serif;*/
 }
 
@@ -79,11 +82,23 @@ textarea {
   /*font-family: 'Montserrat', Arial, Helvetica, sans-serif;*/
 }
 
+button {
+  cursor: pointer;
+  background-color: transparent;
+  background-image: none;
+}
+
+button,
+input {
+  border: none;
+  outline: none;
+}
+
 form {
   width: 100%;
 }
 
-form button {
+#contact-form button {
   margin-top: 20px;
   height: 60px;
   width: 100%;
@@ -122,6 +137,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 #masthead-darkener {
@@ -186,8 +202,6 @@ main {
   padding: 0 3rem;
   height: 500px;
   width: 100%;
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,6 +213,14 @@ main {
     letter-spacing: 1.5px;
     color: #fffc;
     text-align: center;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
   }
 }
 
@@ -418,10 +440,6 @@ h5 {
   color: #fff;
   font-size: 1.2rem;
   font-weight: 600;
-}
-
-.projects {
-  margin-top: 50px;
 }
 
 .projects .card {
@@ -815,6 +833,21 @@ aside {
   }
 }
 
+.not-found-page {
+  min-height: 500px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 1rem;
+    font-size: 6.25rem;
+    color: $highlight-color;
+  }
+}
+
 /* Responsive */
 
 /* Large devices */
@@ -971,4 +1004,76 @@ aside {
   overflow-x: scroll;
   width: 100%;
   max-width: 100%;
+}
+
+.categories {
+  width: 100%;
+  
+  .names {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  hr {
+    width: 100%;
+  }
+  
+  .category {
+    &:not(:first-child) {
+      margin-left: 1rem;
+    }
+  }
+}
+
+#search {
+  form {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 2px;
+    color: gray;
+
+    button {
+      color: inherit;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  input {
+    margin: 0;
+    border: none;
+  }
+
+  #search-results-wrapper {
+    margin-top: 50px;
+    min-height: 200px;
+  }
+
+  #search-suggestion-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #search-suggestion {
+    color: $highlight-color;
+  }
+
+  #search-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.hidden {
+  display: none !important;
 }

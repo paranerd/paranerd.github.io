@@ -1,12 +1,15 @@
 {{ define "main" }}
 
 <!-- Masthead -->
-{{ $image := .Resources.Get "header.jpg" }}
-<div id="masthead-section" style="background-image: url('{{ $image.RelPermalink }}')">
-  <h1>{{ .Title }}</h1>
+{{ with $image := .Resources.Get "header.jpg" }}
+<div id="masthead-section">
+  <h1>{{ $.Page.Title }}</h1>
+
+  <img src="{{ $image.RelPermalink }}" alt="">
 
   <div id="masthead-darkener"></div>
 </div>
+{{ end }}
 
 <main>
   <!-- Posts -->

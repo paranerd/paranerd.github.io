@@ -1,11 +1,14 @@
 {{ define "main" }}
 <!-- Masthead -->
-{{ $image := .Resources.Get "header.jpg" }}
-<div id="masthead-section" style="background-image: url('{{ $image.RelPermalink }}')">
-  <h1>{{ .Title }}</h1>
+{{ with $image := .Resources.Get "header.jpg" }}
+  <div id="masthead-section">
+  <h1>{{ $.Page.Title }}</h1>
+
+  <img src="{{ $image.RelPermalink }}" alt="" style="height: 500px; max-width: 100%; position: absolute; z-index: -1;">
 
   <div id="masthead-darkener"></div>
 </div>
+{{ end }}
 
 <main>
   <div class="content single-post">
@@ -39,7 +42,9 @@
       {{ end }}
 
       <!-- Content -->
-      {{ .Content }}
+      <div data-pagefind-body>
+        {{ .Content }}
+      </div>
 
       <!-- Paginator -->
       <div>
