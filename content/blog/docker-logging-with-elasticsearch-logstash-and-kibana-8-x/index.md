@@ -3,7 +3,6 @@ title: 'Docker Logging With Elasticsearch Logstash and Kibana 8.x'
 date: 2023-06-02T19:42:03+01:00
 draft: false
 author: paranerd
-toc: true
 ---
 
 The [ELK-Stack](https://www.elastic.co/what-is/elk-stack) is one of the most popular logging platforms. It is flexible, well integrated and most of

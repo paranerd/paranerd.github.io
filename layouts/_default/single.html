@@ -33,13 +33,15 @@
         <hr>
       </div>
 
-      <!-- Table of Contents -->
-      {{ if .Params.toc }}
-      <aside class="toc-sm">
-        <h3>Table of Contents</h3>
-        {{ .TableOfContents }}
-      </aside>
-      {{ end }}
+      <!-- Table of Contents (small screens) -->
+      {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+      {{- $has_headers := ge (len $headers) 1 -}}
+      {{- if $has_headers -}}
+        <aside class="toc-sm">
+          <h3>Table of Contents</h3>
+          {{ .TableOfContents }}
+        </aside>
+      {{- end }}
 
       <!-- Content -->
       <div data-pagefind-body>
@@ -66,13 +68,13 @@
       </div>
     </div>
 
-    <!-- Table of Contents -->
-    {{ if .Params.toc }}
+    <!-- Table of Contents (large screens) -->
+    {{- if $has_headers -}}
     <aside class="toc-lg">
       <h3>Table of Contents</h3>
       {{ .TableOfContents }}
     </aside>
-    {{ end }}
+  {{- end }}
   </div>
 </main>
 {{ end }}
