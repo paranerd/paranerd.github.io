@@ -1080,3 +1080,29 @@ aside {
 .hidden {
   display: none !important;
 }
+
+/* Code copy */
+
+div.highlight,
+pre {
+  position: relative;
+}
+
+.copy-code {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: .5rem 1rem;
+  border-radius: 2px;
+  user-select: none;
+  display: none;
+
+  &:hover {
+    background-color: $highlight-color;
+  }
+}
+
+div.highlight:hover .copy-code,
+pre:hover .copy-code {
+    display: block;
+}
