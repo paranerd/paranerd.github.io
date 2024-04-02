@@ -42,18 +42,6 @@ document.addEventListener(
       });
     }
 
-    function isInViewport(elem) {
-      const rect = elem.getBoundingClientRect();
-      const html = document.documentElement;
-
-      return (
-        rect.top < (window.innerHeight || html.clientHeight) &&
-        rect.bottom > 0 &&
-        rect.left < (window.innerWidth || html.clientWidth) &&
-        rect.right > 0
-      );
-    }
-
     document.getElementById('nav-icon').addEventListener('click', (e) => {
       document.getElementById('nav-icon').classList.toggle('open');
       document.getElementById('flyout').classList.toggle('open');
@@ -61,3 +49,15 @@ document.addEventListener(
   },
   false
 );
+
+function isInViewport(elem) {
+  const rect = elem.getBoundingClientRect();
+  const html = document.documentElement;
+
+  return (
+    rect.top < (window.innerHeight || html.clientHeight) &&
+    rect.bottom > 0 &&
+    rect.left < (window.innerWidth || html.clientWidth) &&
+    rect.right > 0
+  );
+}
