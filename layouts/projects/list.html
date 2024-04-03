@@ -1,0 +1,48 @@
+{{ define "main" }}
+
+<!-- Masthead -->
+{{ with $image := .Resources.Get "header.jpg" }}
+<div id="masthead-section">
+  <h1>{{ $.Page.Title }}</h1>
+
+  <img src="{{ $image.RelPermalink }}" alt="">
+</div>
+{{ end }}
+
+<main>
+  <div class="content">
+    <ul class="project-categories">
+      <li>
+        <span class="category active" data-category="all">All</span>
+      </li>
+
+
+      {{ range $name, $taxonomy := .Site.Taxonomies }}
+        {{ if eq "categories" $name }}
+          {{ range $key, $value := $taxonomy }}
+            {{ if ge (where $value.Pages "Section" "projects") 1 }}
+            <li>
+              <span data-category="{{ .Page.Title | urlize }}" class="category">{{ .Page.Title }}</span>
+            </li>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+
+    <div id="projects">
+    {{ range (where .Pages "Type" "projects") }}
+      <a href="{{ .Page.RelPermalink }}" class="project" data-categories='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
+        {{ with .Resources.GetMatch "header.jpg" }}
+          <div class="project-img">
+            <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
+          </div>
+        {{ end }}
+
+        <h2 class="project-title">{{ .Title }}</h2>
+        </a>
+    {{ end }}
+    </div>
+  </div>
+</main>
+{{ end }}
