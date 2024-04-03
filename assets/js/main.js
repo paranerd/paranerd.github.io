@@ -3,7 +3,6 @@ document.addEventListener(
   () => {
     const header = document.getElementsByTagName('header')[0];
     const mastheadHomepage = document.getElementById('masthead-homepage');
-    const arrowDown = document.getElementById('arrow-down');
     const skillBars = document.getElementsByClassName('skill-bar');
 
     window.addEventListener('scroll', () => {
@@ -32,23 +31,80 @@ document.addEventListener(
       }
     });
 
-    if (arrowDown) {
-      arrowDown.addEventListener('click', () => {
-        window.scroll({
-          top: window.innerHeight,
-          left: 0,
-          behavior: 'smooth',
-        });
-      });
-    }
-
-    document.getElementById('nav-icon').addEventListener('click', (e) => {
-      document.getElementById('nav-icon').classList.toggle('open');
-      document.getElementById('flyout').classList.toggle('open');
-    });
+    setupFlyoutMenu();
+    setupArrowDown();
+    setupCategories();
+    setupCollapsibles();
   },
   false
 );
+
+function setupFlyoutMenu() {
+  document.getElementById('nav-icon').addEventListener('click', (e) => {
+    document.getElementById('nav-icon').classList.toggle('open');
+    document.getElementById('flyout').classList.toggle('open');
+  });
+}
+
+function setupArrowDown() {
+  const arrowDown = document.getElementById('arrow-down');
+
+  if (arrowDown) {
+    arrowDown.addEventListener('click', () => {
+      window.scroll({
+        top: window.innerHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    });
+  }
+}
+
+function setupCategories() {
+  const categories = document.querySelectorAll('.category');
+
+  categories.forEach((el) =>
+    el.addEventListener('click', (event) => {
+      // Remove 'active' class from all categories
+      document
+        .querySelectorAll('.category')
+        .forEach((el) => el.classList.remove('active'));
+
+      // Set current category active
+      event.target.classList.add('active');
+      showProjectsByCategory(event.target.dataset.category);
+    })
+  );
+
+  function showProjectsByCategory(category) {
+    document.querySelectorAll('.project').forEach((el) => {
+      const elementCategories = el.dataset.categories
+        .split(',')
+        .filter((el) => el);
+
+      if (category === 'all' || elementCategories.includes(category)) {
+        el.classList.remove('hide-test');
+      } else {
+        el.classList.add('hide-test');
+      }
+    });
+  }
+}
+function setupCollapsibles() {
+  const collapser = document.querySelectorAll('.collapser');
+
+  collapser.forEach((el) => {
+    el.addEventListener('click', (event) => {
+      const target = document.getElementById(event.target.dataset.target);
+
+      el.classList.toggle('collapsed');
+      target.classList.toggle('collapsed');
+      target.style.maxHeight = target.classList.contains('collapsed')
+        ? '0'
+        : `${target.scrollHeight}px`;
+    });
+  });
+}
 
 function isInViewport(elem) {
   const rect = elem.getBoundingClientRect();
