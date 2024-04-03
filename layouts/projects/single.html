@@ -1,6 +1,6 @@
 {{ define "main" }}
 <!-- Masthead -->
-{{ with $image := .Resources.Get "header.jpg" }}
+{{ with $image := .Resources.GetMatch "header.*" }}
 <div id="masthead-section">
   <h1>{{ $.Page.Title }}</h1>
 
@@ -34,7 +34,7 @@
         <!-- Project Links -->
         <div class="project-links">
           {{ range $name, $link := .Params.links }}
-            <button class="btn"><a href="{{ $link }}">{{ upper $name }}</a></button>
+            <button class="btn"><a href="{{ $link }}">{{ replace (upper $name) "_" " " }}</a></button>
           {{ end }}
         </div>
       </div>
