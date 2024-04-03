@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <!-- Masthead -->
-{{ with $image := .Resources.Get "header.jpg" }}
+{{ with $image := .Resources.GetMatch "header.*" }}
 <div id="masthead-section">
   <h1>{{ $.Page.Title }}</h1>
 
@@ -33,13 +33,15 @@
     <div id="projects">
     {{ range (where .Pages "Type" "projects") }}
       <a href="{{ .Page.RelPermalink }}" class="project" data-categories='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
-        {{ with .Resources.GetMatch "header.jpg" }}
+        {{ with .Resources.GetMatch "header.*" }}
           <div class="project-img">
             <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
           </div>
         {{ end }}
 
-        <h2 class="project-title">{{ .Title }}</h2>
+        <div class="project-title-wrapper">
+          <h2 class="project-title">{{ .Title }}</h2>
+        </div>
         </a>
     {{ end }}
     </div>

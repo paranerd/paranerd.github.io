@@ -83,9 +83,9 @@ function setupCategories() {
         .filter((el) => el);
 
       if (category === 'all' || elementCategories.includes(category)) {
-        el.classList.remove('hide-test');
+        el.classList.remove('soft-hide');
       } else {
-        el.classList.add('hide-test');
+        el.classList.add('soft-hide');
       }
     });
   }
