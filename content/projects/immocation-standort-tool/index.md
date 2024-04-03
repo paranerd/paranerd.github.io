@@ -1,6 +1,6 @@
 ---
 title: 'Immocation Standort Tool'
-date: '2021-08-09T08:51:59+01:00'
+date: '2020-10-26T18:51:59+01:00'
 draft: false
 author: paranerd
 skills:
@@ -12,7 +12,7 @@ categories:
   - 'Angular'
   - 'NodeJS'
   - 'MongoDB'
-level: 'advanced'
+level: 'Advanced'
 links: 
   demo: https://standort.immocation.de/
 ---
