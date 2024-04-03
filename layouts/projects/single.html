@@ -1,0 +1,44 @@
+{{ define "main" }}
+<!-- Masthead -->
+{{ with $image := .Resources.Get "header.jpg" }}
+<div id="masthead-section">
+  <h1>{{ $.Page.Title }}</h1>
+
+  <img src="{{ $image.RelPermalink }}" alt="">
+</div>
+{{ end }}
+
+<main>
+  <div class="content single-post">
+    <div class="project-description">
+      {{ .Content }}
+    </div>
+
+    <div class="project-info">
+      <div>
+        <table>
+          <tr>
+            <td>Skills required</td>
+            <td>{{ delimit .Params.skills ", " }}</td>
+          </tr>
+          <tr>
+            <td>Level</td>
+            <td>{{ .Params.level }}</td>
+          </tr>
+          <tr>
+            <td>Categories</td>
+            <td>{{ delimit .Params.categories ", " }}</td>
+          </tr>
+        </table>
+
+        <!-- Project Links -->
+        <div class="project-links">
+          {{ range $name, $link := .Params.links }}
+            <button class="btn"><a href="{{ $link }}">{{ upper $name }}</a></button>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{{ end }}
