@@ -15,7 +15,7 @@ The easiest way, IMHO, to do this is using Docker and Docker Compose. I’m assu
 
 To install WireGuard all you need is to create a file, call it `docker-compose.yaml` and put the following into it:
 
-```
+```yaml { linenos=table }
 ---
 version: "2.1"
 services:
@@ -57,7 +57,7 @@ I will just mention the most important ones here:
 
 To actually create the container run the following command inside the folder you created the `docker-compose.yaml` in:
 
-```bash
+```bash { linenos=table }
 docker-compose up -d
 ```
 

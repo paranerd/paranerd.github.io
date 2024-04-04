@@ -13,7 +13,7 @@ On that server create a folder e.g. `/home/username/certbot/`. In that folder cr
 
 The content of `cloudflare.ini` should look like this:
 
-```ini
+```ini { linenos=table }
 dns_cloudflare_api_token = abcde12345
 ```
 
@@ -21,7 +21,7 @@ Check out [Cloudflare’s help](https://developers.cloudflare.com/api/tokens/cre
 
 With that structure in place, run the following command:
 
-```bash
+```bash { linenos=table }
 sudo docker run -it --rm --name certbot -v "/home/<username>/certbot/certs:/etc/letsencrypt" -v "/home/<username>/certbot/cloudflare.ini:/cloudflare.ini" certbot/dns-cloudflare certonly --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini -m <your-mail-address> --agree-tos --no-eff-email --dns-cloudflare-propagation-seconds 20 --cert-name <your-domain> -d <your-domain>
 ```
 
@@ -33,7 +33,7 @@ You will notice that the certbot container does not persist (because of the `--r
 
 To renew your certificate simply run:
 
-```bash
+```bash { linenos=table }
 sudo docker run -it --rm --name certbot -v "/home/<username>/certbot/certs:/etc/letsencrypt" -v "/home/<username>/certbot/cloudflare.ini:/cloudflare.ini" certbot/dns-cloudflare renew --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini
 ```
 
@@ -43,7 +43,7 @@ To let your webserver pick up the renewed certificates you will probably have to
 
 I have Nginx also running in a container, so I would run the following command:
 
-```bash
+```bash { linenos=table }
 sudo docker exec -it nginx nginx -s reload
 ```
 

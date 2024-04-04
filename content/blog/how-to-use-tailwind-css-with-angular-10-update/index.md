@@ -11,7 +11,7 @@ This is an update to my previous article on how to set up TailwindCSS with Angul
 
 First let me show you the lazy man’s solution. From within your project folder simply call:
 
-```bash
+```bash { linenos=table }
 ng add @ngneat/tailwind
 ```
 
@@ -23,7 +23,7 @@ You could stop here, but if you want to know what exactly is happening “under 
 
 For this tutorial I assume you already have Angular 10 installed on your machine. You can check the [official documentation](https://angular.io/guide/setup-local) if you don’t or [this tool](https://update.angular.io/) if you need to upgrade. You can either follow along with your existing project or create a new one from scratch by running:
 
-```bash
+```bash { linenos=table }
 ng new angular-tailwind-example --style=scss --routing=true
 ```
 
@@ -31,7 +31,7 @@ This creates a project named `angular-tailwind-example` for us. You may call it 
 
 ## Installing dependencies
 
-```bash
+```bash { linenos=table }
 npm i -D tailwindcss postcss postcss-import postcss-loader postcss-scss @angular-builders/custom-webpack
 ```
 
@@ -41,7 +41,7 @@ We still need two files to control our Tailwind setup: `tailwind.config.js` and 
 
 First, create a file named `tailwind.config.js` in your project’s root and enter the following content:
 
-```js
+```js { linenos=table }
 module.exports = (isProd) => ({
     prefix: '',
     future: {
@@ -61,7 +61,7 @@ module.exports = (isProd) => ({
 
 Next create a file named `webpack.config.js`, also in project root, with the following content:
 
-```js
+```js { linenos=table }
 const merge = require('webpack-merge');
 
 module.exports = (config) => {
@@ -98,7 +98,7 @@ The end result of what those files do is exactly the same as in the previous ver
 
 As before, to let Angular know about our custom config, run the following commands (after adjusting the `angular-tailwind-example` part to match the name of your project):
 
-```bash
+```bash { linenos=table }
 echo "Enter project name:" && read projectname && \
 ng config projects.${projectname}.architect.build.builder @angular-builders/custom-webpack:browser && \
 ng config projects.${projectname}.architect.build.options.customWebpackConfig.path webpack.config.js && \
@@ -108,7 +108,7 @@ ng config projects.${projectname}.architect.serve.options.customWebpackConfig.pa
 
 Now your `angular.json` is updated to use the custom configs and you’re ready to
 
-```bash
+```bash { linenos=table }
 ng serve
 ```
 
