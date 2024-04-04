@@ -59,8 +59,13 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #a07a61;
   text-decoration: none;
+  transition: color .1s ease-in-out;
+
+  &:hover {
+    color: $highlight-color;
+  }
 }
 
 input {
@@ -472,6 +477,10 @@ header {
     height: 65px;
     background-color: #30201394;
   }
+
+  a {
+    color: #fff;
+  }
 }
 
 /* Header small screen */
@@ -560,18 +569,35 @@ footer {
   background: #343332;
   color: #fff;
   text-align: center;
+
+  a {
+    color: #fff;
+  }
 }
 
 .footer-logo {
-  padding-bottom: 2rem;
+  /*padding-bottom: 2rem;*/
 }
 
 .footer-sep {
   margin: 0 8px;
+  display: none;
+
+  @media only screen and (min-width: 992px) {
+    display: block;
+  }
 }
 
 .footer-legal {
   margin-top: 10px;
+  line-height: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  @media only screen and (min-width: 992px) {
+    flex-direction: row;
+  }
 }
 
 .footer-social {
@@ -668,6 +694,7 @@ footer {
   justify-content: center;
   align-items: center;
   color: #a07a61;
+  border: 1px solid rgba(0, 0, 0, 0);
   cursor: default;
 
   &.active {
@@ -676,8 +703,7 @@ footer {
   }
 
   &:hover:not(.disabled) {
-    color: #fff;
-    background-color: $highlight-color;
+    border: 1px solid $highlight-color;
     cursor: pointer;
   }
 
@@ -797,6 +823,10 @@ footer {
 
   hr {
     margin: .25rem 0;
+  }
+
+  a {
+    color: #a07a61;
   }
 }
 
@@ -1190,6 +1220,10 @@ pre:hover .copy-code {
       }
     }
   }
+}
+
+.privacy {
+  line-height: 2;
 }
 
 /* Responsive */
