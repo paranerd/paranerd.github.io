@@ -9,7 +9,7 @@ categories:
   - 'PHP'
 level: 'Intermediate'
 links:
-  how_to: https://example.com
+  how_to: https://thegermancoder.com/blog/live-chat-with-websockets
   view_code: https://github.com/paranerd/node-chat
 ---
 
