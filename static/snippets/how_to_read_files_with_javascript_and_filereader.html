@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>FileReader</title>
+
+    <style>
+        input {
+            display: none;
+        }
+
+        .thumbnail {
+            height: 50px;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FileReader</h1>
+
+    <button id="text-loader"><input type="file" />Load Text</button>
+    <button id="image-loader"><input type="file" />Load Image</button>
+
+    <pre id="result"></pre>
+
+    <div id="thumbnails"></div>
+
+    <script>
+        window.onload = function () {
+            // Init text loader
+            document.getElementById("text-loader").addEventListener('click', function () {
+                this.querySelector('input').click();
+            });
+
+            document.querySelector('#text-loader input').addEventListener('change', function () {
+                readFile(this.files[0], displayText);
+            });
+
+            // Init image loader
+            document.getElementById("image-loader").addEventListener('click', function () {
+                this.querySelector('input').click();
+            });
+
+            document.querySelector('#image-loader input').addEventListener('change', function () {
+                readFile(this.files[0], displayImage);
+            });
+        };
+
+        function displayText(text) {
+            document.getElementById('result').innerText = text;
+        }
+
+        function displayImage(src) {
+            let img = new Image();
+            img.src = src;
+            img.className = "thumbnail";
+
+            document.getElementById("thumbnails").appendChild(img);
+        }
+
+        function readFile(file, callback) {
+            let reader = new FileReader();
+
+            reader.onload = function() {
+                callback(reader.result);
+            };
+
+            if (file.type.match(/^text/)) {
+                reader.readAsText(file);
+            }
+            else if (file.type.match(/^image/)) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
