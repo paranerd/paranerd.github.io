@@ -3,9 +3,12 @@ languageCode: 'en-us'
 title: 'The German Coder'
 sectionPagesMenu: main
 summaryLength: 50
-paginate: 2
+paginate: 10
 markup:
   tableOfContents:
     startLevel: 2
     endLevel: 3
     ordered: false
+permalinks:
+  page:
+    blog: /blog/:year/:month/:day/:slug/
