@@ -1,7 +1,6 @@
 {{ define "main" }}
-
 <!-- Masthead -->
-{{ with $image := .Resources.Get "header.jpg" }}
+{{ with $image := .Resources.GetMatch "header.*" }}
 <div id="masthead-section">
   <h1>{{ $.Page.Title }}</h1>
 
@@ -18,7 +17,7 @@
       <div class="post-content-wrapper">
         <!-- Post image -->
         <div class="post-img-wrapper">
-          {{ with .Resources.GetMatch "header.jpg" }}
+          {{ with .Resources.GetMatch "header-small.*" }}
           <div class="post-img">
             <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
           </div>
