@@ -34,7 +34,7 @@
         <!-- Project Links -->
         <div class="project-links">
           {{ range $name, $link := .Params.links }}
-            <button class="btn"><a href="{{ $link }}">{{ replace (upper $name) "_" " " }}</a></button>
+            <button class="btn"><a href="{{ $link }}" {{ if strings.HasPrefix $link "http" }} target="_blank"{{ end }}>{{ replace (upper $name) "_" " " }}</a></button>
           {{ end }}
         </div>
       </div>
