@@ -5,6 +5,13 @@
   <h1>{{ $.Page.Title }}</h1>
 
   <img src="{{ $image.RelPermalink }}" alt="">
+
+  {{ with $credit := $.Params.credit }}
+  <span class="image-credit">
+    Image by
+    <a href="{{ $credit.url }}">{{ $credit.author }}</a></a>
+  </span>
+  {{ end }}
 </div>
 {{ end }}
 
@@ -14,7 +21,6 @@
     <div class="post-content">
       <!-- Paginator -->
       <div>
-        <hr>
         <div class="post-nav">
           <!-- Previous -->
           {{ with .PrevInSection }}
@@ -28,12 +34,11 @@
             <span class="next-arrow">&#8250;</span>
           {{ end }}
         </div>
-        <hr>
       </div>
 
       <!-- Table of Contents (small screens) -->
       {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
-      {{- $has_headers := ge (len $headers) 1 -}}
+      {{- $has_headers := ge (len $headers) 2 -}}
       {{- if $has_headers -}}
         <aside class="toc-sm">
           <div class="collapser collapsed" data-target="toc-sm-content"></div>
@@ -51,7 +56,6 @@
 
       <!-- Paginator -->
       <div>
-        <hr>
         <div class="post-nav">
           <!-- Previous -->
           {{ with .PrevInSection }}
@@ -65,7 +69,6 @@
             <span class="next-arrow">&#8250;</span>
           {{ end }}
         </div>
-        <hr>
       </div>
     </div>
 
