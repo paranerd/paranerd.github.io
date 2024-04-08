@@ -12,7 +12,6 @@ categories:
   - Reverse Engineering
 level: 'Intermediate'
 links: 
-  demo: https://thegermancoder.com/demo/2048
   code: https://github.com/paranerd/2048
 ---
 

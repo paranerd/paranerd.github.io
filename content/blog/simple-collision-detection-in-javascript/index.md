@@ -3,6 +3,9 @@ title: 'Simple Collision Detection in JavaScript'
 date: '2019-04-05T08:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "how-to"
+  - "javascript"
 ---
 
 I’ve been playing around developing some simple games (pun intended^^) from time to time, just for the fun of it. To do that I very often come across some kind of collision detection. I thought I’d show you an easy way of detecting collisions in JavaScript!

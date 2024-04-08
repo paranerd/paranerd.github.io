@@ -3,6 +3,9 @@ title: 'How To Parse CSV With JavaScript'
 date: '2018-11-29T08:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "javascript"
+  - "projects"
 ---
 
 CSV files (short for Comma-Seperated Values) are a great way to exchange tabular data in a plain text file.

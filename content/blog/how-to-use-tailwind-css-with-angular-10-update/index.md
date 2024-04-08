@@ -3,6 +3,8 @@ title: 'How to Use Tailwind CSS With Angular 10 (Update)'
 date: '2020-10-25T09:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "general"
 ---
 
 This is an update to my previous article on how to set up TailwindCSS with Angular 10. Apparently, packages since got updates, which change some of the steps required. Also I’ll show you a hassle-free one-line-solution that takes care of all the configuration. Amazing content coming up!

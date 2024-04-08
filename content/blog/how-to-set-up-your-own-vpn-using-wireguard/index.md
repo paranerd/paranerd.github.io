@@ -3,6 +3,11 @@ title: 'How to Set Up Your Own VPN Using WireGuard'
 date: '2021-08-09T08:57:22+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "general"
+credit:
+  url: https://unsplash.com/de/fotos/blau-weisse-holzbeschilderung-auf-grunem-rasenplatz-tagsuber-mWtYBG3HdXU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+  author: 'Matt Seymour | Unsplash'
 ---
 
 Setting up your own private VPN got so much easier with the rise of WireGuard. Let me show you how it’s done!

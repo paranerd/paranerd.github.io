@@ -3,6 +3,11 @@ title: "How to Use Let's Encrypt With Docker and Cloudflare"
 date: '2021-08-09T08:51:59+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "general"
+credit:
+  url: https://unsplash.com/de/fotos/silbernes-vorhangeschloss-Lexcm-6FHRU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+  author: 'Muhammad Zaqy Al Fattah | Unsplash'
 ---
 
 I wrote about Let’s Encrypt SSL certificates before on this blog but I recently discovered an even better way of doing things!

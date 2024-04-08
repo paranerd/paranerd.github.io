@@ -9,5 +9,7 @@ categories:
   - JavaScript
 level: Intermediate
 links:
-  how_to: https://example.org
+  how_to: /blog/2018/10/01/encrypting-text-with-aes-256-in-javascript/
 ---
+
+In this project I created an AES-module that can do symmetric encryption and decryption in JavaScript. I’m using standard libraries included in CryptoJS. The module can encrypt, optionally sign, and of course decrypt text directly in the browser. As a standalone module it can easily be integrated in other projects as well.

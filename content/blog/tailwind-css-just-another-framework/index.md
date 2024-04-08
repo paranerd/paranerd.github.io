@@ -3,6 +3,8 @@ title: 'Tailwind CSS – Just another Framework?'
 date: '2020-10-01T08:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "general"
 ---
 
 Using a CSS framework makes the life of a web developer a whole lot easier. There are a bunch of them out there, most of you probably know about Twitter’s Bootstrap, which I’ve been using for the past decade or so. But there’s a new kid on the block: Tailwind CSS.

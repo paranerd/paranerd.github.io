@@ -3,6 +3,11 @@ title: 'How To Build A Live Chat With WebSockets'
 date: '2018-10-17T08:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "how-to"
+  - "javascript"
+  - "projects"
+  - "server"
 ---
 
 WebSockets are a fascinating technology, a TCP-based network protocol that allows for asynchronous bi-directional communication. The client starts a connection, sends a request and gets a response – just like HTTP. But much unlike HTTP this connection is kept alive! This has many advantages, like
@@ -109,7 +114,7 @@ function isLoggedIn(req, res, next) {
 module.exports = router;
 ```
 
-If you followed my [Hello NodeJS Tutorial](https://thegermancoder.com/blog/hello-nodejs-installation), this should look familiar. All we do is check if the user is logged in and if so, render the chat view. Of course, for this route to take effect, we have to add it to `controllers/index.js`:
+If you followed my [Hello NodeJS Tutorial](/blog/2018/09/17/hello-nodejs-installation/), this should look familiar. All we do is check if the user is logged in and if so, render the chat view. Of course, for this route to take effect, we have to add it to `controllers/index.js`:
 
 ```js { linenos=table }
 router.use('/chat', require('./chat'));

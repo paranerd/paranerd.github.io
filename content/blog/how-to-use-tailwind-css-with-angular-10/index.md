@@ -3,6 +3,8 @@ title: 'How to Use Tailwind CSS With Angular 10'
 date: '2020-10-01T09:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "general"
 ---
 
 **IMPORTANT UPDATE:** Since the release of this article, some things changed, so the solution described below will very likely no longer work. But don’t worry, I got you covered with my follow-up article!

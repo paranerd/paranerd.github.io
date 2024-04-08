@@ -3,6 +3,9 @@ title: 'How To Read Files With JavaScript And FileReader'
 date: '2018-10-29T08:01:34+01:00'
 draft: false
 author: paranerd
+categories: 
+  - "how-to"
+  - "javascript"
 ---
 
 Analysing files in PHP is easy. But what if you want to access the content of a file without the overhead of sending it to a server first (e.g. for displaying a thumbnail before uploading an image)?
