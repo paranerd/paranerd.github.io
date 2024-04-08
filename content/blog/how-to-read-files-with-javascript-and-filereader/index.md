@@ -12,7 +12,7 @@ Analysing files in PHP is easy. But what if you want to access the content of a 
 
 JavaScript provides a neat little API to achieve just that. It's called [FileReader](https://developer.mozilla.org/de/docs/Web/API/FileReader). Let's find out what it can do!
 
-## The Layout
+### The Layout
 
 Here's the basic layout for this project. Don't judge me for the design, as usual this post is mainly about functionality – you're free to add all the bells and whistles you like!
 
@@ -41,7 +41,7 @@ Here's the basic layout for this project. Don't judge me for the design, as usua
 
 When you open this page in your browser, you’ll see a heading and a non-functional button. Let’s change the latter!
 
-## Reading Text Files
+### Reading Text Files
 
 This is the JavaScript that makes the button come to life:
 
@@ -86,7 +86,7 @@ function displayText(text) {
 
 It gets the text-content of the file and simply puts it into the `result` container.
 
-## Reading Image Files
+### Reading Image Files
 
 As if getting plain text from files wasn’t exciting enough, we’re can even go a step further and load an entire image!
 
@@ -126,6 +126,6 @@ else if (file.type.match(/^image/)) {
 
 With the encoded data we create a new image and add it to the `thumbnails` container.
 
-## Conclusion
+### Conclusion
 
 This has been a basic introduction to the FileReader-API. You can [download the full script](/snippets/how_to_read_files_with_javascript_and_filereader.html) (right click and save as) to play around with it. Let me know in the comments what you ended up creating with this cool feature!

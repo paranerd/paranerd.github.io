@@ -9,7 +9,7 @@ categories:
 
 This is an update to my previous article on how to set up TailwindCSS with Angular 10. Apparently, packages since got updates, which change some of the steps required. Also I’ll show you a hassle-free one-line-solution that takes care of all the configuration. Amazing content coming up!
 
-## The easy way
+### The easy way
 
 First let me show you the lazy man’s solution. From within your project folder simply call:
 
@@ -21,7 +21,7 @@ This will install all the necessary packages as well as add and update configura
 
 You could stop here, but if you want to know what exactly is happening “under the hood” not least to be able to tweak things down the road, you should keep on reading!
 
-## Angular prerequisites
+### Angular prerequisites
 
 For this tutorial I assume you already have Angular 10 installed on your machine. You can check the [official documentation](https://angular.io/guide/setup-local) if you don’t or [this tool](https://update.angular.io/) if you need to upgrade. You can either follow along with your existing project or create a new one from scratch by running:
 
@@ -31,13 +31,13 @@ ng new angular-tailwind-example --style=scss --routing=true
 
 This creates a project named `angular-tailwind-example` for us. You may call it however you like, just make sure to set it accordingly in some of the folling commands.
 
-## Installing dependencies
+### Installing dependencies
 
 ```bash { linenos=table }
 npm i -D tailwindcss postcss postcss-import postcss-loader postcss-scss @angular-builders/custom-webpack
 ```
 
-## Setting up the configuration
+### Setting up the configuration
 
 We still need two files to control our Tailwind setup: `tailwind.config.js` and `webpack.config.js`. The content differs greatly, however.
 
@@ -96,7 +96,7 @@ module.exports = (config) => {
 
 The end result of what those files do is exactly the same as in the previous version, but now we’re leveraging Tailwind’s integrated purging instead of setting it up ourselves
 
-## Tell Angular
+### Tell Angular
 
 As before, to let Angular know about our custom config, run the following commands (after adjusting the `angular-tailwind-example` part to match the name of your project):
 
@@ -116,7 +116,7 @@ ng serve
 
 Congratulations! You just successfully set up TailwindCSS in Angular!
 
-## Conclusion
+### Conclusion
 
 The current solution outlined in this post is far superior to the previous one because we can use up-to-date dependencies and leverage more built-in functionality instead of implementing our own, which usually saves us some trouble and compatibility issues. When going the ngneat/tailwind route, things could hardly get any easier and I would highly recommend it simply for being less error prone.
 

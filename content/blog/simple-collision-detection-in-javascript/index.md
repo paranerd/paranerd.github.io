@@ -10,7 +10,7 @@ categories:
 
 I’ve been playing around developing some simple games (pun intended^^) from time to time, just for the fun of it. To do that I very often come across some kind of collision detection. I thought I’d show you an easy way of detecting collisions in JavaScript!
 
-## What is a collision?
+### What is a collision?
 
 Before we even start coding, we need to think about what it actually is that we want to detect. We need some conditions. For this example I’m assuming the two objects colliding are both rectangles. They have x- and y-coordinates as well as a width and a height. So far, so good. That was easy enough. Now the far more important part: how do we know if two rectangles collided?
 
@@ -25,7 +25,7 @@ If this doesn’t make sense while reading, I suggest sketching, it helps tremen
 
 The first two conditions check for horizontal overlapping, while the others check for it vertically. Notice, that if we were to only check the first condition for horizontal overlapping, R1’s right might be to the right of R2’s right… but R1’s left might be as well, simply putting R1 to the right of R2, without them overlapping at all. This applies to rules 3 and for in the same way.
 
-## Translating into code
+### Translating into code
 
 Now that we have our conditions outlined, the toughest part is actually already done. All that’s left is directly translating English to Code:
 
@@ -47,7 +47,7 @@ That’s is all it takes to detect between two very simple objects. Very easy, v
 
 We could be done now, but let’s go ahead and add one more convenient feature!
 
-## Where did that come from?
+### Where did that come from?
 
 In addition to the fact that a collision occurred at all you oftentimes need to also determine where that collision happend exactly. In my attempt at a Jump ‘n’ Run, for example, it made a huge difference whether my character hit the enemy from above or any other side (a matter of life and death, if you will!). So here’s what I came up with to get that information:
 
@@ -101,7 +101,7 @@ function collision(r1, r2) {
 }
 ```
 
-## Conclusion
+### Conclusion
 
 There you go! Once you get your head around the conditions of collisions in theory, coding it is a piece of cake. The actual challenge in collision detection lies prediction, minimizing computation and all other kinds of really exciting stuff that would be beyond the scope of this article.
 

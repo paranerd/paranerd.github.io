@@ -18,11 +18,11 @@ WebSockets are a fascinating technology, a TCP-based network protocol that allow
 
 If you want to learn more about WebSockets, I recommend this [introduction](https://blog.teamtreehouse.com/an-introduction-to-websockets). In this post we’re focussing on utilizing WebSockets to build a simple chat application.
 
-## Prerequisites
+### Prerequisites
 
 We’re building this project on top of the [Hello NodeJS Tutorial Series](/blog/hello-nodejs-installation), so we can focus exclusively on adding chat-functionality.
 
-## Socket.IO
+### Socket.IO
 
 To make working with WebSockets a breeze, there’s a project called ‘socket.io’ that provides a convenient wrapper for it. And of course, there’s an npm package for it as well!
 
@@ -51,7 +51,7 @@ io.use(ioSession(session, {
 }));
 ```
 
-## Listen And Emit
+### Listen And Emit
 
 Now here is where the fun really kicks off:
 
@@ -89,7 +89,7 @@ Notice how socket.io is not just capable of transmitting plain text but also JSO
 
 Let that sink in! If you’re like me and get confused about all this `broadcast.emit`, `socket.emit`, `io.emit` stuff, here’s a nice little [Cheatsheet](https://socket.io/docs/emit-cheatsheet/) from the official docs to help you!
 
-## Adding A Route
+### Adding A Route
 
 Before we continue with the client-part of socket.io, let’s add a route for our chat! Remember: we manage our routes in the `controllers` folder. In there we add a file called `chat.js` and write the following to it:
 
@@ -128,7 +128,7 @@ router.get('/', function(req, res) {
 });
 ```
 
-## Adding A View
+### Adding A View
 
 After we’ve got our route installed, we need to make sure there’s actually content to be found there! For that we create a view for our chat. We do this by creating a folder `views/chat/` and a file `index.hbs` inside that folder with the following content:
 
@@ -171,7 +171,7 @@ There’s nothing special in this markup, just a container for messages, an inpu
 
 The styling for this page can be found in [`public/css/design.css`](https://github.com/paranerd/node-chat/blob/master/public/css/design.css). It’s quite long, so I won’t put it here as it would only distract from the essential code.
 
-## Sending Messages
+### Sending Messages
 
 Remember the code block in `server.js` where messages were distributed by the server? Here comes the client part in `public/js/chat.js`! First, this is how we send messages:
 
@@ -206,7 +206,7 @@ function getTime() {
 
 This basically just formats and adds the message to the chat-box.
 
-## Receiving Messages
+### Receiving Messages
 
 We don’t want to talk to ourselves, do we? So let’s see how we handle incoming messages:
 
@@ -226,6 +226,6 @@ socket.on('chat message', function(msg) {
 
 This is, where the message “types” come into play. Depending on the type of the message we display them with different colors. Also, when the client receives a ‘chat message’ it expects a JSON-Object and extracts the actual message body and the sender’s username from it.
 
-## Conclusion
+### Conclusion
 
 There we go! A basic chat application using NodeJS and WebSockets with Socket.IO. Check out the [final project](https://github.com/paranerd/node-chat) on GitHub!

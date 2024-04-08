@@ -11,7 +11,7 @@ categories:
 
 Some time ago I started using Tailwind CSS to style my web projects. But while Tailwind is a pleasure to use, it was a major pain to get it to work nicely with Angular.
 
-## Installing dependencies
+### Installing dependencies
 
 Assuming you have your Angular app installed, in the app’s root folder run:
 
@@ -21,7 +21,7 @@ npm i -D tailwindcss postcss-import postcss-loader postcss-scss@2.1.1 @angular-b
 
 That little `@2.1.1` there solved an issue I spent hours upon hours trying to fix. Most tutorials I found on the web omitted the version tag and seemed to be working fine – when they were written. But as it happens, just 4 days before I attempted my installation, postcss-scss got an update to 3.0.0 which apparently showed some incompatibilities with the rest of the setup leading to all kinds of cryptic error messages.
 
-## Configs
+### Configs
 
 First, run
 
@@ -102,11 +102,11 @@ What this does is using `autoprefixer` to add all the necessary vendor prefixes 
 
 One of the most important steps, however, is using `purgecss` to get rid of unused classes. More on that in the next section.
 
-## Getting rid of the clutter
+### Getting rid of the clutter
 
 You can get Tailwind CSS to work without `purgecss`, but I would definitely not recommend it. Utilizing it brought the size of my bundled `styles.scss` from ~2.2MB to ~15kB in one of my projects, so the difference is quite significant!
 
-## Letting Angular know
+### Letting Angular know
 
 Now that we have a lot of new files in place, we have to actually let Angular know they exist. You could go ahead and edit your `angular.json` manually (as I did on my first couple of attempts – not particularly joyful!) or simply run the following commands (make sure to adjust the `angular-tailwind-example` part of each line if necessary):
 
@@ -125,6 +125,6 @@ Last thing to do is to incorporate Tailwind into our `styles.scss` by putting th
 @import 'tailwindcss/utilities';
 ```
 
-## Conclusion
+### Conclusion
 
 You should now be all set up to use Tailwind CSS in your Angular project. I hope you found this tutorial before wasting valuable hours of your life trying to make sense of the mess you created! Head over to their amazing [documentation](https://tailwindcss.com/docs) to learn more about how to leverage Tailwind to its full potential. Do you get stuck setting up Tailwind (things might likely not be up-to-date 6 months from now^^), please let me know in the comments so we can update this guide!

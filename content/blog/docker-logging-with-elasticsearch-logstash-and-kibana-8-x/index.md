@@ -210,9 +210,9 @@ below.
  
 Let’s disect a little further.
 
-## Services
+### Services
 
-### setup
+#### setup
 
 After checking if all the passwords are set it creates the certification authority as well as the TLS-
 certificates (if they don’t exist already). Those are important for secure inter-container communication,
@@ -221,7 +221,7 @@ which is enabled by default in v8.x and has been my main struggle deploying this
 Finally it sets up separate users and their passwords for Kibana and Logstash so that communication
 works as expected.
 
-### es01
+#### es01
 
 This one has a bunch of ‚xpack.security’ environment variables for establishing secure connections to all
 connecting services (i.e. Kibana and Logstash).
@@ -232,12 +232,12 @@ Proxmox, I’m not entirely sure. If you have a solution to this, please let me 
 
 ‚es01‘ sharing the same ‚./certs‘ directory where ‚setup‘ was so kind to put all necessary files into.
 
-### redis
+#### redis
 
 We use a Redis database as some sort of a „cache“ for incoming log messages. Nothing to configure here,
 I like that!
 
-### logstash-agent
+#### logstash-agent
 
 This is where all the log messages will arrive. Its only job is to take those incoming messages and pipe 
 them into a redis database (coming up).
@@ -245,7 +245,7 @@ It is configured via a ‚logstash.conf‘ that we’ll have a look at below.
  
 We open port 10514 for TCP and UDP instead of the default port 514 to avoid clashes.
 
-### logstash-central
+#### logstash-central
 
 The second logstash instance will pull logs from the Redis „cache“, apply formatting, filters and the like
 to then forward (output) them to Elasticsearch
@@ -259,13 +259,13 @@ If at some point the ‚agent‘ should be overwhelmed, we can simply spin up an
 share the load. Redis I expect to be capable enough to just handle everything we throw at it but of course
 one may also scale this.
 
-### kibana
+#### kibana
 
 Finally, the only part we’ll actually interact with: Kibana.
 Not much to do here, just listen on port 5601 for external access, provide it with username and password
 for the ‚kibana_system‘ user, make sure we’re all using the same certificates and off we go!
 
-## Logstash configurations
+### Logstash configurations
 
 Well, not quite yet. First, we need to add some Logstash configurations so that everything is routed and
 processed the way we need it.
@@ -423,11 +423,11 @@ Once everything is up and running, you’ll be greeted with a nice login screen.
 You can now enter your username and password of the ‚elastic‘ user, but you’ll not find any logs in it.
 How could you? We didn’t set that up, yet! So let’s finally do that!
 
-## Send logs from Docker
+### Send logs from Docker
 
 Sending logs from Docker to a remote server is really simple. I’ll show you 2 ways you can do it.
 
-### Set up logging per container
+#### Set up logging per container
 
 Adding the following to any `docker-compose.yaml` will result in the logs being sent to the remote
 logging server only for that particular container:
@@ -443,7 +443,7 @@ What’s nice is that as of Docker version 20.10 you can send logs to a remote s
 locally via [docker logs](https://docs.docker.com/config/containers/logging/dual-logging/#overview).
 Prior to that docker logs wasn’t available anymore in that case.
 
-### Set up logging for all containers
+#### Set up logging for all containers
 
 The first method is great if you only want to send logs for particular containers. If you want ALL the
 logs, adding the snippet to all compose files would be very cumbersome. To make it easier, you can

@@ -23,7 +23,7 @@ The first row of this file is called the header, telling us what each column is 
 
 What do we need to do to parse this text into a structure we can work with in JavaScript?
 
-## Extracting The Rows
+### Extracting The Rows
 
 First, we need to separte the rows. Regular Expressions are a great way to do that!
 
@@ -35,7 +35,7 @@ Simply split the string at an end of line delimiter (`\r\n` for Windows, `\n` fo
 
 By calling `splice` on the `lines` array we also remove this first line from the result-set, thus making the next part easier.
 
-## Extracting The Values
+### Extracting The Values
 
 The regular expression we use to extract the values is quite complex. I encourage you to dissect it using an online regex tool like [regex101](https://regex101.com/). You ready? Here comes:
 
@@ -88,6 +88,6 @@ In the end the `elements` array contains an object for each row that we can easi
 ]
 ```
 
-## Conclusion
+### Conclusion
 
 There we go! A basic but fully functional CSV-Parser. Working with CSV data in JavaScript only requires a couple lines of code and the power of Regular Expressions. You can try this parser in a live demo!
