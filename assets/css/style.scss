@@ -120,6 +120,10 @@ form {
     color: $highlight-color;
     background: #fff;
   }
+
+  a {
+    color: inherit;
+  }
 }
 
 #contact-form button {
@@ -828,6 +832,12 @@ footer {
   a {
     color: #a07a61;
   }
+
+  img {
+    display: block;
+    margin: auto;
+    width: 25%;
+  }
 }
 
 aside {
@@ -892,9 +902,12 @@ aside {
 }
 
 .post-nav {
+  padding: .25rem 0;
   width: 100%;
   display: flex;
   font-size: 0.75rem;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
 
   .prev-arrow {
     margin-right: 5px;
@@ -906,10 +919,6 @@ aside {
 
   .spacer {
     flex: 1;
-  }
-
-  hr {
-    margin: 0;
   }
 
   a {
@@ -1351,5 +1360,20 @@ pre:hover .copy-code {
   .project-info {
     margin-left: 1rem;
     width: 50%;
+  }
+}
+
+.image-credit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  padding: .5rem;
+  font-size: .6rem;
+  color: #ccc;
+
+  a {
+    color: inherit;
   }
 }
