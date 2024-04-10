@@ -19,8 +19,6 @@ In this series I want to introduce you to a technology called "Progressive Web A
 
 ### Introduction to PWAs
 
-\[/fusion_title\]\[fusion_text columns="" column_min_width="" column_spacing="" rule_style="default" rule_size="" rule_color="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id=""\]
-
 Progressive Web Apps (or PWAs for short) could possibly be the future of mobile app development. At its core a PWA is simply a website with some special features added to it. It is a website that can be installed to a device's homescreen without an app store.
 
 The "progressive"-part means that even if your browser doesn't support Progressive Web Apps, you will still see the website. You will not get any of the special features, but you shouldn't encounter any errors because of it either.
@@ -32,8 +30,6 @@ You can add a PWA to your home screen, like a bookmark - but so much more! It's 
 There’s a lot to learn about Progressive Web Apps. If you want to dive deeper into theory I recommend you start with [this article](https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/). It describes the fundamentals of PWAs and what makes them so great.
 
 The rest of this tutorial is going to be rather practical as to give you the basic frame you need to get started with developing PWAs. No bells and no whistles, so we can focus only on the crucial parts.
-
-\[/fusion_text\]\[fusion_title hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id="" content_align="left" size="3" font_size="" line_height="" letter_spacing="" margin_top="" margin_bottom="" text_color="" style_type="default" sep_color=""\]
 
 ### The Basics
 
@@ -48,8 +44,6 @@ It boils down to only those 3 main components:
 - a set of icons
 
 ### Project structure
-
-\[/fusion_title\]\[fusion_text columns="" column_min_width="" column_spacing="" rule_style="default" rule_size="" rule_color="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id=""\]
 
 Here's what a basic Progressive Web App looks like:
 
