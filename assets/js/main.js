@@ -159,3 +159,19 @@ function setupCopyButtons() {
     }
   });
 }
+
+window.onContactFormSubmit = function () {
+  const form = document.getElementById('contact-form');
+  form.submit();
+  form.reset();
+
+  const submitResponseEl = document.getElementById(
+    'contact-form-submit-response'
+  );
+
+  submitResponseEl.classList.add('reveal');
+
+  setTimeout(() => {
+    submitResponseEl.classList.remove('reveal');
+  }, 2000);
+};
