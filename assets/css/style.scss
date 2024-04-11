@@ -172,6 +172,9 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  animation: fadeIn 1s ease-out .5s, slideIn 1s ease-out .5s;
+  animation-fill-mode: forwards;
 
   h1 {
     margin: 0 3rem;
@@ -200,6 +203,9 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1.5s;
+    animation-fill-mode: forwards;
 
     span {
       font-size: 14px;
@@ -210,6 +216,31 @@ main {
       font-weight: 300;
     }
   }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    margin-top: 50px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+.slide-reveal {
+  margin-top: 0 !important;
+  opacity: 1 !important;
+  transition: opacity 1s ease-in-out, margin 1s ease-in-out;
 }
 
 #masthead-section {
@@ -578,10 +609,6 @@ footer {
   a {
     color: #fff;
   }
-}
-
-.footer-logo {
-  /*padding-bottom: 2rem;*/
 }
 
 .footer-sep {
