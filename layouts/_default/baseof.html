@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- General header -->
     {{ partial "head.html" . }}
+
+    <!-- Additional scripts -->
+    {{ block "scripts" . }} {{ end }}
   </head>
   <body>
     <!-- Header -->
@@ -12,8 +16,5 @@
 
     <!-- Footer -->
     {{ partial "footer" . }}
-
-    <!-- Additional scripts -->
-    {{ block "scripts" . }} {{ end }}
   </body>
 </html>
