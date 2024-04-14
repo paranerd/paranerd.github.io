@@ -1,5 +1,6 @@
 ---
 title: "Privacy"
+description: "Privacy"
 sitemap:
   priority: 0.1
 layout: "privacy"

@@ -1,5 +1,6 @@
 ---
 title: "Impressum"
+description: "Impressum"
 sitemap:
   priority: 0.1
 layout: "impressum"
