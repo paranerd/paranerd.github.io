@@ -3,7 +3,13 @@ document.addEventListener(
   () => {
     const header = document.getElementsByTagName('header')[0];
     const mastheadHomepage = document.getElementById('masthead-homepage');
+    const mastheadSubtitle = document.getElementById('masthead-subtitle');
     const skillBars = document.getElementsByClassName('skill-bar');
+
+    if (mastheadHomepage && window.scrollY === 0) {
+      mastheadHomepage.classList.add('fadeInUp');
+      mastheadSubtitle.classList.add('fadeIn');
+    }
 
     window.addEventListener('scroll', () => {
       if (mastheadHomepage) {
