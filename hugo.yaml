@@ -12,3 +12,4 @@ markup:
 permalinks:
   page:
     blog: /blog/:year/:month/:day/:slug/
+enableRobotsTXT: true
