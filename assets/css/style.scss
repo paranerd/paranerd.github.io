@@ -529,8 +529,14 @@ header {
 }
 
 #header-logo {
+  height: 50px;
   align-self: center;
   z-index: 3;
+
+  img {
+    max-height: 100%;
+    object-fit: contain;
+  }
 }
 
 #header-menu-flyout {
@@ -612,6 +618,14 @@ footer {
 
   a {
     color: #fff;
+  }
+}
+
+.footer-logo {
+  height: 50px;
+
+  img {
+    max-height: 50px;
   }
 }
 
