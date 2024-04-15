@@ -1,14 +1,8 @@
 {{ define "main" }}
 <!-- Masthead -->
-<div id="masthead-section" style="background-image: url('/blog/header.jpg')">
-  <h1>Impressum</h1>
-
-  <div id="masthead-darkener"></div>
-</div>
+{{ partial "masthead" . }}
 
 <main>
-  <div class="content privacy">
-    {{ .Content }}
-  </div>
+  {{ .Content }}
 </main>
 {{ end }}

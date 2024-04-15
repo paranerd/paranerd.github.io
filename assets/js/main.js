@@ -39,7 +39,7 @@ document.addEventListener(
 
     setupFlyoutMenu();
     setupArrowDown();
-    setupCategories();
+    setupFilter();
     setupCollapsibles();
     setupCopyButtons();
   },
@@ -67,36 +67,6 @@ function setupArrowDown() {
   }
 }
 
-function setupCategories() {
-  const categories = document.querySelectorAll('.category');
-
-  categories.forEach((el) =>
-    el.addEventListener('click', (event) => {
-      // Remove 'active' class from all categories
-      document
-        .querySelectorAll('.category')
-        .forEach((el) => el.classList.remove('active'));
-
-      // Set current category active
-      event.target.classList.add('active');
-      showProjectsByCategory(event.target.dataset.category);
-    })
-  );
-
-  function showProjectsByCategory(category) {
-    document.querySelectorAll('.project').forEach((el) => {
-      const elementCategories = el.dataset.categories
-        .split(',')
-        .filter((el) => el);
-
-      if (category === 'all' || elementCategories.includes(category)) {
-        el.classList.remove('soft-hide');
-      } else {
-        el.classList.add('soft-hide');
-      }
-    });
-  }
-}
 function setupCollapsibles() {
   const collapser = document.querySelectorAll('.collapser');
 
@@ -123,47 +93,6 @@ function isInViewport(elem) {
     rect.left < (window.innerWidth || html.clientWidth) &&
     rect.right > 0
   );
-}
-
-function setupCopyButtons() {
-  document.querySelectorAll('pre > code').forEach((codeblock) => {
-    const container = codeblock.parentNode.parentNode;
-
-    const copybutton = document.createElement('button');
-    copybutton.classList.add('copy-code', 'light');
-    copybutton.innerText = 'Copy';
-
-    function copyingDone() {
-      copybutton.innerText = 'Copied!';
-      setTimeout(() => {
-        copybutton.innerText = 'Copy';
-      }, 2000);
-    }
-
-    copybutton.addEventListener('click', () => {
-      if ('clipboard' in navigator) {
-        navigator.clipboard.writeText(codeblock.textContent);
-        copyingDone();
-      }
-    });
-
-    if (container.classList.contains('highlight')) {
-      container.appendChild(copybutton);
-    } else if (container.parentNode.firstChild == container) {
-      // td containing LineNos
-    } else if (
-      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode
-        .nodeName == 'TABLE'
-    ) {
-      // table containing LineNos and code
-      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(
-        copybutton
-      );
-    } else {
-      // code blocks not having highlight as parent class
-      codeblock.parentNode.appendChild(copybutton);
-    }
-  });
 }
 
 window.onContactFormSubmit = function () {

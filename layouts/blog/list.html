@@ -1,50 +1,42 @@
 {{ define "main" }}
-<!-- Masthead -->
-{{ with $image := .Resources.GetMatch "header.*" }}
-<div id="masthead-section">
-  <h1>{{ $.Page.Title }}</h1>
 
-  <img src="{{ $image.RelPermalink }}" alt="">
-</div>
-{{ end }}
+<!-- Masthead -->
+{{ partial "masthead" . }}
 
 <main>
   <!-- Posts -->
-  <div class="content">
-    {{ $paginator := .Paginate (where .Pages "Type" "blog")}}
-    {{ range $paginator.Pages }}
-    <div class="post">
-      <div class="post-content-wrapper">
-        <!-- Post image -->
-        <div class="post-img-wrapper">
-          {{ with .Resources.GetMatch "header-small.*" }}
-          <div class="post-img">
-            <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
-          </div>
-          {{ end }}
+  {{ $paginator := .Paginate (where .Pages "Type" "blog")}}
+  {{ range $paginator.Pages }}
+  <div class="list-item">
+    <div class="list-item-content-wrapper">
+      <!-- Post image -->
+      <div class="list-item-img-wrapper">
+        {{ with .Resources.GetMatch "header.*" }}
+        {{ $image := .Resize "x400" }}
+        <div class="list-item-img">
+          <img src="data:{{ $image.MediaType.Type }};base64,{{ $image.Content | base64Encode }}">
         </div>
-
-        <div class="post-title-summary-wrapper">
-          <!-- Post title -->
-          <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-
-          <!-- Post summary -->
-          <span class="post-summary">{{ .Summary }}</span>
-        </div>
+        {{ end }}
       </div>
 
-      <!-- Post info -->
-      <div class="post-info">
-        <hr />
-        {{ $format := "Jan 2, 2006" }} By {{ .Params.author }} | {{
-        .Params.date.Format $format }}
-        <hr />
+      <div class="list-item-title-summary-wrapper">
+        <!-- Post title -->
+        <h2 class="list-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+        <!-- Post summary -->
+        <span class="list-item-summary">{{ .Summary }}</span>
       </div>
     </div>
-    {{ end }}
 
-    <!-- Paginator -->
-    {{ partial "pagination" (dict "page" . "paginator" $paginator) }}
+    <!-- Post info -->
+    <div class="list-item-info">
+      {{ $format := "Jan 2, 2006" }} By {{ .Params.author }} | {{
+      .Params.date.Format $format }}
+    </div>
   </div>
+  {{ end }}
+
+  <!-- Paginator -->
+  {{ partial "pagination" (dict "page" . "paginator" $paginator) }}
 </main>
 {{ end }}

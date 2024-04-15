@@ -5,7 +5,7 @@
 
 {{ if gt $pag.TotalPages 1 }}
   {{ $.Scratch.Set "dot_rendered" false }}
-  <nav aria-label="page navigation">
+  <nav class="pagination-wrapper" aria-label="page navigation">
     <ul class="pagination">
       <!-- Previous page -->
       {{ if $pag.HasPrev  }}

@@ -1,84 +1,69 @@
 {{ define "main" }}
 <!-- Masthead -->
-{{ with $image := .Resources.GetMatch "header.*" }}
-<div id="masthead-section">
-  <h1>{{ $.Page.Title }}</h1>
+{{ partial "masthead" . }}
 
-  <img src="{{ $image.RelPermalink }}" alt="">
-
-  {{ with $credit := $.Params.credit }}
-  <span class="image-credit">
-    Image by
-    <a href="{{ $credit.url }}">{{ $credit.author }}</a></a>
-  </span>
-  {{ end }}
-</div>
-{{ end }}
-
-<main>
-  <div class="content single-post">
-    <!-- Post content -->
-    <div class="post-content">
-      <!-- Paginator -->
-      <div>
-        <div class="post-nav">
-          <!-- Previous -->
-          {{ with .PrevInSection }}
-            <span class="prev-arrow">&#8249;</span>
-            <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
-          {{ end }}
-          <!-- Next -->
-          {{ with .NextInSection }}
-          <span class="spacer"></span>
-            <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
-            <span class="next-arrow">&#8250;</span>
-          {{ end }}
-        </div>
-      </div>
-
-      <!-- Table of Contents (small screens) -->
-      {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
-      {{- $has_headers := ge (len $headers) 2 -}}
-      {{- if $has_headers -}}
-        <aside class="toc-sm">
-          <div class="collapser collapsed" data-target="toc-sm-content"></div>
-          <h3>Table of Contents</h3>
-          <div id="toc-sm-content" class="collapsible collapsed">
-            {{ .TableOfContents }}
-          </div>
-        </aside>
-      {{- end }}
-
-      <!-- Content -->
-      <div data-pagefind-body>
-        {{ .Content }}
-      </div>
-
-      <!-- Paginator -->
-      <div>
-        <div class="post-nav">
-          <!-- Previous -->
-          {{ with .PrevInSection }}
-            <span class="prev-arrow">&#8249;</span>
-            <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
-          {{ end }}
-          <!-- Next -->
-          {{ with .NextInSection }}
-          <span class="spacer"></span>
-            <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
-            <span class="next-arrow">&#8250;</span>
-          {{ end }}
-        </div>
+<main class="single-post">
+  <!-- Post content -->
+  <div class="post-content">
+    <!-- Paginator -->
+    <div>
+      <div class="post-nav">
+        <!-- Previous -->
+        {{ with .PrevInSection }}
+          <span class="prev-arrow">&#8249;</span>
+          <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
+        {{ end }}
+        <!-- Next -->
+        {{ with .NextInSection }}
+        <span class="spacer"></span>
+          <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
+          <span class="next-arrow">&#8250;</span>
+        {{ end }}
       </div>
     </div>
 
-    <!-- Table of Contents (large screens) -->
+    <!-- Table of Contents (small screens) -->
+    {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+    {{- $has_headers := ge (len $headers) 2 -}}
     {{- if $has_headers -}}
-    <aside class="toc-lg">
-      <h3>Table of Contents</h3>
-      {{ .TableOfContents }}
-    </aside>
-  {{- end }}
+      <aside class="toc-sm">
+        <div class="collapser collapsed" data-target="toc-sm-content"></div>
+        <h3>Table of Contents</h3>
+        <div id="toc-sm-content" class="collapsible collapsed">
+          {{ .TableOfContents }}
+        </div>
+      </aside>
+    {{- end }}
+
+    <!-- Content -->
+    <div data-pagefind-body>
+      {{ .Content }}
+    </div>
+
+    <!-- Paginator -->
+    <div>
+      <div class="post-nav">
+        <!-- Previous -->
+        {{ with .PrevInSection }}
+          <span class="prev-arrow">&#8249;</span>
+          <a class="previous" href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
+        {{ end }}
+        <!-- Next -->
+        {{ with .NextInSection }}
+        <span class="spacer"></span>
+          <a class="next" href="{{ .RelPermalink }}">{{ .LinkTitle }} </a>
+          <span class="next-arrow">&#8250;</span>
+        {{ end }}
+      </div>
+    </div>
   </div>
+
+  <!-- Table of Contents (large screens) -->
+  {{- if $has_headers -}}
+  <aside class="toc-lg">
+    <h3>Table of Contents</h3>
+    {{ .TableOfContents }}
+  </aside>
+  {{- end }}
 </main>
 {{ end }}

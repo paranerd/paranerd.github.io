@@ -1,0 +1,17 @@
+<div id="masthead-section">
+  <h1>{{ $.Page.Title }}</h1>
+
+  {{ with .Resources.GetMatch "header.*" }}
+  <!--<img src="{{ .RelPermalink }}" alt="Header" />-->
+  <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}" />
+  {{ else }}
+  <img src="/img/bg.jpg" alt="Header" />
+  {{ end }}
+
+  {{ with $credit := $.Params.credit }}
+  <span class="image-credit">
+    Image by
+    <a href="{{ $credit.url }}">{{ $credit.author }}</a></a>
+  </span>
+  {{ end }}
+</div>

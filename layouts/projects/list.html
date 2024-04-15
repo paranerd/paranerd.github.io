@@ -1,50 +1,38 @@
 {{ define "main" }}
 
 <!-- Masthead -->
-{{ with $image := .Resources.GetMatch "header.*" }}
-<div id="masthead-section">
-  <h1>{{ $.Page.Title }}</h1>
-
-  <img src="{{ $image.RelPermalink }}" alt="">
-</div>
-{{ end }}
+{{ partial "masthead" . }}
 
 <main>
-  <div class="content">
-    <ul class="project-categories">
-      <li>
-        <span class="category active" data-category="all">All</span>
-      </li>
+  <ul class="filters">
+    <li class="filter active" data-filter="all">All</li>
 
-
-      {{ range $name, $taxonomy := .Site.Taxonomies }}
-        {{ if eq "categories" $name }}
-          {{ range $key, $value := $taxonomy }}
-            {{ if ge (where $value.Pages "Section" "projects") 1 }}
-            <li>
-              <span data-category="{{ .Page.Title | urlize }}" class="category">{{ .Page.Title }}</span>
-            </li>
-            {{ end }}
+    {{ range $name, $taxonomy := .Site.Taxonomies }}
+      {{ if eq "categories" $name }}
+        {{ range $key, $value := $taxonomy }}
+          {{ if ge (where $value.Pages "Section" "projects") 1 }}
+          <li data-filter="{{ .Page.Title | urlize }}" class="filter">{{ .Page.Title }}</li>
           {{ end }}
         {{ end }}
       {{ end }}
-    </ul>
-
-    <div id="projects">
-    {{ range (where .Pages "Type" "projects") }}
-      <a href="{{ .Page.RelPermalink }}" class="project" data-categories='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
-        {{ with .Resources.GetMatch "header.*" }}
-          <div class="project-img">
-            <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}">
-          </div>
-        {{ end }}
-
-        <div class="project-title-wrapper">
-          <h2 class="project-title">{{ .Title }}</h2>
-        </div>
-        </a>
     {{ end }}
-    </div>
+  </ul>
+
+  <div class="grid-view">
+  {{ range (where .Pages "Type" "projects") }}
+    <a href="{{ .Page.RelPermalink }}" class="grid-item filter-item" data-filters='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
+      {{ with .Resources.GetMatch "header.*" }}
+      {{ $image := .Resize "x400" }}
+        <div class="grid-item-img">
+          <img src="data:{{ $image.MediaType.Type }};base64,{{ $image.Content | base64Encode }}">
+        </div>
+      {{ end }}
+
+      <div class="grid-item-title-wrapper">
+        <h2 class="grid-item-title">{{ .Title }}</h2>
+      </div>
+      </a>
+  {{ end }}
   </div>
 </main>
 {{ end }}

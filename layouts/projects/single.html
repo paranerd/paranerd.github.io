@@ -1,42 +1,35 @@
 {{ define "main" }}
+
 <!-- Masthead -->
-{{ with $image := .Resources.GetMatch "header.*" }}
-<div id="masthead-section">
-  <h1>{{ $.Page.Title }}</h1>
+{{ partial "masthead" . }}
 
-  <img src="{{ $image.RelPermalink }}" alt="">
-</div>
-{{ end }}
+<main class="project-page">
+  <div class="project-description">
+    {{ .Content }}
+  </div>
 
-<main>
-  <div class="content single-post">
-    <div class="project-description">
-      {{ .Content }}
-    </div>
+  <div class="project-info">
+    <div>
+      <table>
+        <tr>
+          <td>Skills required</td>
+          <td>{{ delimit .Params.skills ", " }}</td>
+        </tr>
+        <tr>
+          <td>Level</td>
+          <td>{{ .Params.level }}</td>
+        </tr>
+        <tr>
+          <td>Categories</td>
+          <td>{{ delimit .Params.categories ", " }}</td>
+        </tr>
+      </table>
 
-    <div class="project-info">
-      <div>
-        <table>
-          <tr>
-            <td>Skills required</td>
-            <td>{{ delimit .Params.skills ", " }}</td>
-          </tr>
-          <tr>
-            <td>Level</td>
-            <td>{{ .Params.level }}</td>
-          </tr>
-          <tr>
-            <td>Categories</td>
-            <td>{{ delimit .Params.categories ", " }}</td>
-          </tr>
-        </table>
-
-        <!-- Project Links -->
-        <div class="project-links">
-          {{ range $name, $link := .Params.links }}
-            <button class="btn"><a href="{{ $link }}" {{ if strings.HasPrefix $link "http" }} target="_blank"{{ end }}>{{ replace (upper $name) "_" " " }}</a></button>
-          {{ end }}
-        </div>
+      <!-- Project Links -->
+      <div class="project-links">
+        {{ range $name, $link := .Params.links }}
+          <button class="btn"><a href="{{ $link }}" {{ if strings.HasPrefix $link "http" }} target="_blank"{{ end }}>{{ replace (upper $name) "_" " " }}</a></button>
+        {{ end }}
       </div>
     </div>
   </div>

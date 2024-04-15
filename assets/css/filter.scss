@@ -1,0 +1,60 @@
+.filters {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  flex-direction: column;
+  list-style: none;
+
+  @media only screen and (min-width: $bp-large) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  li {
+    height: 40px;
+    width: 100%;
+    padding-bottom: 3px;
+
+    &:not(:first-child) {
+      border-top: 1px solid #8f867b;
+    }
+
+    @media only screen and (min-width: $bp-large) {
+      width: auto;
+      border: none;
+      border-top: none;
+  
+      &:not(:first-child) {
+        border: none;
+      }
+    }
+  }
+}
+
+.filter {
+  height: 100%;
+  width: 100%;
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-color: rgba(0, 0, 0, 0);
+  transition: color 200ms ease-in, border-color 200ms ease-in;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: $highlight-color;
+  }
+
+  &.active {
+    color: $highlight-color;
+    border-color: $highlight-color;
+  }
+}
