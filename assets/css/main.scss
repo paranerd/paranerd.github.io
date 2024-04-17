@@ -400,6 +400,9 @@ h5 {
   padding: 3rem 2rem 3rem 2rem;
   height: auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media only screen and (min-width: $bp-large) {
     width: 30%;
@@ -410,11 +413,7 @@ h5 {
     font-size: 1.5rem;
     line-height: 1.21;
     font-weight: 600;
-    color: $highlight-color !important;
-  
-    a {
-      color: $highlight-color !important;
-    }
+    color: #fff;
   }
 
   .card-icon-wrapper {
@@ -515,15 +514,23 @@ h5 {
   font-weight: 600;
 }
 
-.projects .card {
-  transition: all .4s ease-in-out;
-  background: #343332;
-  color: #fff;
-}
+.projects {
+  .card {
+    transition: all .4s ease-in-out;
+    background: #343332;
+    color: #fff;
 
-.projects .card:hover {
-  background: #fff;
-  color: #000;
+    &:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+      border: 1px solid $highlight-color;
+
+      .card-title {
+        color: $highlight-color;
+      }
+    }
+  }
 }
 
 /* Header */
