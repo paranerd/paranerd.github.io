@@ -9,7 +9,7 @@
     <ul class="pagination">
       <!-- Previous page -->
       {{ if $pag.HasPrev  }}
-        <li class="page-item"><a href="{{ $pag.Prev.URL }}" rel="prev" class="page-link">&#8249;</a></li>
+        <li class="page-item"><a href="{{ $pag.Prev.URL }}" rel="prev" class="page-link" aria-label="Previous page">&#8249;</a></li>
       {{ end }}
 
       {{ range $pag.Pagers }}
@@ -48,7 +48,7 @@
 
       <!-- Next page -->
       {{ if $pag.HasNext }}
-      <li class="page-item"><a href="{{ $pag.Next.URL }}" rel="next" class="page-link">&#8250;</a></li>
+      <li class="page-item"><a href="{{ $pag.Next.URL }}" rel="next" class="page-link" aria-label="Next page">&#8250;</a></li>
       {{ end }}
     </ul>
   </nav>

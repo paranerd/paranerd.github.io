@@ -20,7 +20,7 @@
 
   <div class="grid-view">
   {{ range (where .Pages "Type" "projects") }}
-    <a href="{{ .Page.RelPermalink }}" class="grid-item filter-item" data-filters='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
+    <a href="{{ .Page.RelPermalink }}" class="grid-item filter-item" aria-label="{{ .Title }}" data-filters='{{ range .Params.categories }}{{ . | urlize }},{{ end }}'>
       {{ with .Resources.GetMatch "header.*" }}
       {{ $image := .Resize "x400" }}
         <div class="grid-item-img">
