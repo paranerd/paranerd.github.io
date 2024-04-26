@@ -1,15 +1,14 @@
-{{ $codeCopy := resources.Get "js/code-copy.js" }}
-{{ $filter := resources.Get "js/filter.js" }}
-{{ $search := resources.Get "js/search.js" }}
-{{ $main := resources.Get "js/main.js" }}
+{{- $opts := dict "minify" true "externals" "/pagefind/pagefind.js" }}
+
+{{ $codeCopy := resources.Get "js/code-copy.ts" | js.Build $opts }}
+{{ $filter := resources.Get "js/filter.ts" | js.Build $opts }}
+{{ $search := resources.Get "js/search.ts" | js.Build $opts }}
+{{ $main := resources.Get "js/main.ts" | js.Build $opts }}
 
 {{- if eq hugo.Environment "development"}}
-  {{ $js := slice $codeCopy $filter $main | resources.Concat "js/bundle.js" | js.Build}}
+  {{ $js := slice $codeCopy $filter $search $main | resources.Concat "js/dev-bundle.js" | js.Build $opts }}
   <script src="{{ $js.RelPermalink }}"></script>
 {{- else }}
-  {{- $opts := dict "minify" true }}
-  {{ $js := slice $codeCopy $filter $main | resources.Concat "js/bundle.js" | js.Build $opts | fingerprint }}
+  {{ $js := slice $codeCopy $filter $search $main | resources.Concat "js/prod-bundle.js" | js.Build $opts | fingerprint }}
   <script src="{{ $js.RelPermalink }}" integrity="{{- $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end }}
-
-{{ $search.Publish }}

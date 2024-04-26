@@ -9,31 +9,36 @@ const searchSuggestions = [
 let searchSuggestionPos = 0;
 
 function updateSearchSuggestion() {
+  const searchSuggestionDiv = document.getElementById('search-suggestion');
+
+  if (!searchSuggestionDiv) return;
   searchSuggestionPos = (searchSuggestionPos + 1) % searchSuggestions.length;
 
-  document.getElementById('search-suggestion').innerText =
-    searchSuggestions[searchSuggestionPos];
+  searchSuggestionDiv.innerText = searchSuggestions[searchSuggestionPos];
 }
 
-window.addEventListener('DOMContentLoaded', async (event) => {
+window.addEventListener('DOMContentLoaded', async () => {
   setInterval(updateSearchSuggestion, 1000);
 
   const resultsDiv = document.getElementById('search-results');
+  // @ts-ignore
   const pagefind = await import('/pagefind/pagefind.js');
 
   document
     .getElementById('search-input')
-    .addEventListener('input', async (e) => {
-      if (!e.target.value) {
+    ?.addEventListener('input', async (e) => {
+      if (resultsDiv && !(e.target as HTMLInputElement).value) {
         hideElement('search-empty');
         unhideElement('search-suggestion-wrapper');
         resultsDiv.innerHTML = '';
         return;
       }
 
-      const search = await pagefind.debouncedSearch(e.target.value);
+      const search = await pagefind.debouncedSearch(
+        (e.target as HTMLInputElement).value
+      );
 
-      if (search) {
+      if (resultsDiv && search) {
         hideElement('search-suggestion-wrapper');
         resultsDiv.innerHTML = '';
       }
@@ -46,25 +51,28 @@ window.addEventListener('DOMContentLoaded', async (event) => {
       }
     });
 
-  document.getElementById('search-clear').addEventListener('click', () => {
-    document.getElementById('search-input').value = '';
+  document.getElementById('search-clear')?.addEventListener('click', () => {
+    (document.getElementById('search-input') as HTMLInputElement).value = '';
   });
 
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get('q');
+  const searchInputDiv = document.querySelector(
+    '#search input'
+  ) as HTMLInputElement;
 
-  if (query) {
-    document.querySelector('#search input').value = query;
-    document.querySelector('#search input').dispatchEvent(new Event('input'));
+  if (searchInputDiv && query) {
+    searchInputDiv.value = query;
+    searchInputDiv.dispatchEvent(new Event('input'));
   }
 });
 
 function hideElement(id) {
-  document.getElementById(id).classList.add('hidden');
+  document.getElementById(id)?.classList.add('hidden');
 }
 
 function unhideElement(id) {
-  document.getElementById(id).classList.remove('hidden');
+  document.getElementById(id)?.classList.remove('hidden');
 }
 
 async function renderResults(target, results) {
@@ -85,6 +93,7 @@ async function renderResults(target, results) {
     const postImg = createElement('div', ['list-item-img'], postImgWrapper);
     const img = createElement('img', null, postImg);
     img['src'] = resultData.meta.image;
+    console.log('img src', resultData.meta.image);
     const postTitleSummaryWrapper = createElement(
       'div',
       ['list-item-title-summary-wrapper'],
