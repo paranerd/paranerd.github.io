@@ -93,7 +93,6 @@ async function renderResults(target, results) {
     const postImg = createElement('div', ['list-item-img'], postImgWrapper);
     const img = createElement('img', null, postImg);
     img['src'] = resultData.meta.image;
-    console.log('img src', resultData.meta.image);
     const postTitleSummaryWrapper = createElement(
       'div',
       ['list-item-title-summary-wrapper'],

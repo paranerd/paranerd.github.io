@@ -1,5 +1,3 @@
-console.log('main.ts');
-
 interface Window {
   onContactFormSubmit: Function;
 }
