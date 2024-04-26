@@ -1,15 +1,21 @@
-{{ $codeCopy := resources.Get "js/code-copy.js" }}
-{{ $filter := resources.Get "js/filter.js" }}
-{{ $search := resources.Get "js/search.js" }}
-{{ $main := resources.Get "js/main.js" }}
+<!-- Define build options -->
+{{- $devOpts := dict "externals" "/pagefind/pagefind.js" }}
+{{- $prodOpts := dict "minify" true }}
 
+<!-- Include all TypeScript files -->
+{{ $codeCopy := resources.Get "js/code-copy.ts" | js.Build $devOpts }}
+{{ $filter := resources.Get "js/filter.ts" | js.Build $devOpts }}
+{{ $search := resources.Get "js/search.ts" | js.Build $devOpts }}
+{{ $main := resources.Get "js/main.ts" | js.Build $devOpts }}
+
+<!-- Bundle -->
+{{ $bundle := slice $codeCopy $filter $search $main | resources.Concat "js/bundle.js" }}
+
+<!-- Build -->
 {{- if eq hugo.Environment "development"}}
-  {{ $js := slice $codeCopy $filter $main | resources.Concat "js/bundle.js" | js.Build}}
+  {{ $js := $bundle | js.Build $devOpts }}
   <script src="{{ $js.RelPermalink }}"></script>
 {{- else }}
-  {{- $opts := dict "minify" true }}
-  {{ $js := slice $codeCopy $filter $main | resources.Concat "js/bundle.js" | js.Build $opts | fingerprint }}
+  {{ $js := $bundle | js.Build (merge $devOpts $prodOpts) }}
   <script src="{{ $js.RelPermalink }}" integrity="{{- $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{- end }}
-
-{{ $search.Publish }}

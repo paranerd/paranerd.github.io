@@ -1,6 +1,10 @@
+document.addEventListener('DOMContentLoaded', () => {
+  setupCopyButtons();
+});
+
 function setupCopyButtons() {
   document.querySelectorAll('pre > code').forEach((codeblock) => {
-    const container = codeblock.parentNode.parentNode;
+    const container = codeblock.parentNode?.parentNode;
 
     const copybutton = document.createElement('button');
     copybutton.classList.add('copy-code', 'light');
@@ -15,18 +19,21 @@ function setupCopyButtons() {
 
     copybutton.addEventListener('click', () => {
       if ('clipboard' in navigator) {
-        navigator.clipboard.writeText(codeblock.textContent);
+        navigator.clipboard.writeText(codeblock.textContent ?? '');
         copyingDone();
       }
     });
 
-    if (container.classList.contains('highlight')) {
+    if (
+      container &&
+      (container as HTMLElement).classList.contains('highlight')
+    ) {
       container.appendChild(copybutton);
-    } else if (container.parentNode.firstChild == container) {
+    } else if (container?.parentNode?.firstChild == container) {
       // td containing LineNos
     } else if (
-      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode
-        .nodeName == 'TABLE'
+      codeblock.parentNode?.parentNode?.parentNode?.parentNode?.parentNode
+        ?.nodeName == 'TABLE'
     ) {
       // table containing LineNos and code
       codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(
@@ -34,7 +41,7 @@ function setupCopyButtons() {
       );
     } else {
       // code blocks not having highlight as parent class
-      codeblock.parentNode.appendChild(copybutton);
+      codeblock.parentNode?.appendChild(copybutton);
     }
   });
 }
