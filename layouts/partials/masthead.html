@@ -2,7 +2,8 @@
   <h1>{{ $.Page.Title }}</h1>
 
   {{ with .Resources.GetMatch "header.*" }}
-  <img src="data:{{ .MediaType.Type }};base64,{{ .Content | base64Encode }}" />
+  {{ $src := printf "data:%s;base64,%s" .MediaType.Type (.Content | base64Encode) }}
+  <img {{ printf "src=%q" $src | safeHTMLAttr }}>
   {{ else }}
   <img src="/img/bg.jpg" alt="Header" />
   {{ end }}
