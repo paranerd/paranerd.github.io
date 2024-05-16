@@ -186,12 +186,8 @@ main {
     margin: 0 3rem;
     text-align: center;
     color: #fffc;
-    font-size: 1.8rem;
+    font-size: clamp(1.8rem, 5vw, 6.25rem);;
     letter-spacing: 1.5px;
-
-    @media only screen and (min-width: $bp-large) {
-      font-size: 6.25rem;
-    }
   }
 
   h2 {
