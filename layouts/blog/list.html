@@ -8,25 +8,27 @@
   {{ $paginator := .Paginate (where .Pages "Type" "blog")}}
   {{ range $paginator.Pages }}
   <div class="list-item">
-    <div class="list-item-content-wrapper">
-      <!-- Post image -->
-      <div class="list-item-img-wrapper">
-        {{ with .Resources.GetMatch "header.*" }}
-        {{ $image := .Resize "x400" }}
-        <div class="list-item-img">
-          <img src="data:{{ $image.MediaType.Type }};base64,{{ $image.Content | base64Encode }}">
+    <a href="{{ .RelPermalink }}">
+      <div class="list-item-content-wrapper">
+        <!-- Post image -->
+        <div class="list-item-img-wrapper">
+          {{ with .Resources.GetMatch "header.*" }}
+          {{ $image := .Resize "x400" }}
+          <div class="list-item-img">
+            <img src="data:{{ $image.MediaType.Type }};base64,{{ $image.Content | base64Encode }}">
+          </div>
+          {{ end }}
         </div>
-        {{ end }}
-      </div>
 
-      <div class="list-item-title-summary-wrapper">
-        <!-- Post title -->
-        <h2 class="list-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <div class="list-item-title-summary-wrapper">
+          <!-- Post title -->
+          <h2 class="list-item-title">{{ .Title }}</h2>
 
-        <!-- Post summary -->
-        <span class="list-item-summary">{{ .Summary }}</span>
+          <!-- Post summary -->
+          <span class="list-item-summary">{{ .Summary }}</span>
+        </div>
       </div>
-    </div>
+    </a>
 
     <!-- Post info -->
     <div class="list-item-info">

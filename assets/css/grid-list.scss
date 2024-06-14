@@ -161,6 +161,10 @@
   color: #a07a61;
   letter-spacing: 1px;
 
+  &:hover {
+    color: $highlight-color;
+  }
+
   @media only screen and (min-width: $bp-large) {
     margin-top: 0;
   }
@@ -170,6 +174,7 @@
   font-size: 14px;
   line-height: 2;
   text-align: justify;
+  color: #222;
 }
 
 .list-item-info {
