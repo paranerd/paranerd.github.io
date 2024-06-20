@@ -55,6 +55,7 @@ api:
     key: 'my-key'
 
 ota:
+  platform: esphome
   password: 'my-password'
 
 wifi:
@@ -357,6 +358,7 @@ api:
     key: 'my-key'
 
 ota:
+  platform: esphome
   password: 'my-password'
 
 wifi:
