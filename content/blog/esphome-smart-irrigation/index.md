@@ -62,17 +62,15 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: 'Irrigation Hotspot'
-    password: 'password'
-
-captive_portal:
-
 # Device Specific Config
 binary_sensor:
   - platform: status
     name: 'Status'
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 60s
 
 sprinkler:
   # Valve controller
@@ -347,7 +345,11 @@ esphome:
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
+
+substitutions:
+  max_runtime: '60'
+  valve_open_delay: 5s
 
 # Enable logging
 logger:
@@ -365,285 +367,287 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: 'Irrigation Hotspot'
-    password: 'password'
-
-captive_portal:
-
 binary_sensor:
   - platform: status
     name: 'Status'
 
-substitutions:
-  max_runtime: '60'
-  valve_open_delay: 5s
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 60s
 
 script:
   # Execution helpers to allow for delays to be cancelled
   - id: valve_1_on_off
     then:
       - switch.turn_on: valve_1
-      - delay: !lambda 'return id(valve_1_duration).state * 1000;'
+      - delay: !lambda "return id(valve_1_duration).state * 1000 * 60;"
       - switch.turn_off: valve_1
   - id: valve_2_on_off
     then:
       - switch.turn_on: valve_2
-      - delay: !lambda 'return id(valve_2_duration).state * 1000;'
+      - delay: !lambda "return id(valve_2_duration).state * 1000 * 60;"
       - switch.turn_off: valve_2
   - id: valve_3_on_off
     then:
       - switch.turn_on: valve_3
-      - delay: !lambda 'return id(valve_3_duration).state * 1000;'
+      - delay: !lambda "return id(valve_3_duration).state * 1000 * 60;"
       - switch.turn_off: valve_3
   - id: valve_4_on_off
     then:
       - switch.turn_on: valve_4
-      - delay: !lambda 'return id(valve_4_duration).state * 1000;'
+      - delay: !lambda "return id(valve_4_duration).state * 1000 * 60;"
       - switch.turn_off: valve_4
   - id: valve_5_on_off
     then:
       - switch.turn_on: valve_5
-      - delay: !lambda 'return id(valve_5_duration).state * 1000;'
+      - delay: !lambda "return id(valve_5_duration).state * 1000 * 60;"
       - switch.turn_off: valve_5
   - id: valve_6_on_off
     then:
       - switch.turn_on: valve_6
-      - delay: !lambda 'return id(valve_6_duration).state * 1000;'
+      - delay: !lambda "return id(valve_6_duration).state * 1000 * 60;"
       - switch.turn_off: valve_6
   - id: valve_7_on_off
     then:
       - switch.turn_on: valve_7
-      - delay: !lambda 'return id(valve_7_duration).state * 1000;'
+      - delay: !lambda "return id(valve_7_duration).state * 1000 * 60;"
       - switch.turn_off: valve_7
   - id: valve_8_on_off
     then:
       - switch.turn_on: valve_8
-      - delay: !lambda 'return id(valve_8_duration).state * 1000;'
+      - delay: !lambda "return id(valve_8_duration).state * 1000 * 60;"
       - switch.turn_off: valve_8
 
 switch:
   # Valves
   - platform: gpio
     id: valve_1
-    name: 'Sprenger 1'
-    icon: 'mdi:sprinkler'
-    pin: GPIO16
+    name: "Sprenger 1"
+    icon: "mdi:sprinkler"
+    pin: GPIO32
     on_turn_on:
       then:
         - script.execute: valve_1_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_1_on_off
   - platform: gpio
     id: valve_2
-    name: 'Sprenger 2'
-    icon: 'mdi:sprinkler'
-    pin: GPIO14
+    name: "Sprenger 2"
+    icon: "mdi:sprinkler"
+    pin: GPIO33
     on_turn_on:
       then:
         - script.execute: valve_2_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_2_on_off
   - platform: gpio
     id: valve_3
-    name: 'Sprenger 3'
-    icon: 'mdi:sprinkler'
-    pin: GPIO12
+    name: "Sprenger 3"
+    icon: "mdi:sprinkler"
+    pin: GPIO25
     on_turn_on:
       then:
         - script.execute: valve_3_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_3_on_off
   - platform: gpio
     id: valve_4
-    name: 'Sprenger 4'
-    icon: 'mdi:sprinkler'
-    pin: GPIO13
+    name: "Sprenger 4"
+    icon: "mdi:sprinkler"
+    pin: GPIO26
     on_turn_on:
       then:
         - script.execute: valve_4_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_4_on_off
   - platform: gpio
     id: valve_5
-    name: 'Sprenger 5'
-    icon: 'mdi:sprinkler'
-    pin: GPIO15
+    name: "Sprenger 5"
+    icon: "mdi:sprinkler"
+    pin: GPIO27
     on_turn_on:
       then:
         - script.execute: valve_5_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_5_on_off
   - platform: gpio
     id: valve_6
-    name: 'Sprenger 6'
-    icon: 'mdi:sprinkler'
-    pin: GPIO0
+    name: "Sprenger 6"
+    icon: "mdi:sprinkler"
+    pin: GPIO14
     on_turn_on:
       then:
         - script.execute: valve_6_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_6_on_off
   - platform: gpio
     id: valve_7
-    name: 'Sprenger 7'
-    icon: 'mdi:sprinkler'
-    pin: GPIO4
+    name: "Sprenger 7"
+    icon: "mdi:sprinkler"
+    pin: GPIO12
     on_turn_on:
       then:
         - script.execute: valve_7_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_7_on_off
   - platform: gpio
     id: valve_8
-    name: 'Sprenger 8'
-    icon: 'mdi:sprinkler'
-    pin: GPIO5
+    name: "Sprenger 8"
+    icon: "mdi:sprinkler"
+    pin: GPIO13
     on_turn_on:
       then:
         - script.execute: valve_8_on_off
-    on_turn_off:
+    on_turn_off: 
       then:
         - script.stop: valve_8_on_off
 
   # Valves Enabled
   - platform: template
     id: valve_1_enabled
-    name: 'Sprenger 1 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 1 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_2_enabled
-    name: 'Sprenger 2 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 2 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_3_enabled
-    name: 'Sprenger 3 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 3 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_4_enabled
-    name: 'Sprenger 4 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 4 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_5_enabled
-    name: 'Sprenger 5 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 5 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_6_enabled
-    name: 'Sprenger 6 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 6 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_7_enabled
-    name: 'Sprenger 7 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 7 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: valve_8_enabled
-    name: 'Sprenger 8 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Sprenger 8 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
 
   # Zones
   - platform: template
     id: zone_1
-    name: 'Zone 1'
-    icon: 'mdi:sprinkler-variant'
+    name: "Zone 1"
+    icon: "mdi:sprinkler-variant"
     lambda: |-
       return id(valve_1).state || id(valve_8).state;
-    turn_on_action:
+    turn_on_action: 
       then:
-        - if:
-            condition:
-              - switch.is_on: valve_1_enabled
-            then:
-              - number.set:
-                  id: valve_1_duration
-                  value: !lambda 'return id(zone_1_duration).state;'
-              - switch.turn_on: valve_1
-        - if:
-            condition:
-              - switch.is_on: valve_8_enabled
-            then:
-              - number.set:
-                  id: valve_8_duration
-                  value: !lambda 'return id(zone_1_duration).state;'
-              - switch.turn_on: valve_8
-        - delay: !lambda 'return id(zone_1_duration).state * 1000;'
-        - switch.turn_off: zone_1
-    turn_off_action:
+      - if: 
+          condition:
+            - switch.is_on: valve_1_enabled
+          then:
+            - number.set:
+                id: valve_1_duration
+                value: !lambda "return id(zone_1_duration).state;"
+            - switch.turn_on: valve_1
+      - if:
+          condition:
+            - switch.is_on: valve_8_enabled
+          then:
+            - number.set:
+                id: valve_8_duration
+                value: !lambda "return id(zone_1_duration).state;"
+            - switch.turn_on: valve_8
+      - delay: !lambda "return id(zone_1_duration).state * 1000 * 60;"
+      - switch.turn_off: zone_1
+    turn_off_action: 
       then:
         - switch.turn_off: valve_1
         - switch.turn_off: valve_8
   - platform: template
     id: zone_2
-    name: 'Zone 2'
-    icon: 'mdi:sprinkler-variant'
+    name: "Zone 2"
+    icon: "mdi:sprinkler-variant"
     lambda: |-
       return id(valve_2).state;
-    turn_on_action:
+    turn_on_action: 
       then:
-        - if:
+        - if: 
             condition:
               - switch.is_on: valve_2_enabled
             then:
               - number.set:
                   id: valve_2_duration
-                  value: !lambda 'return id(zone_2_duration).state;'
+                  value: !lambda "return id(zone_2_duration).state;"
               - switch.turn_on: valve_2
-        - delay: !lambda 'return id(zone_2_duration).state * 1000;'
+        - delay: !lambda 'return id(zone_2_duration).state * 1000 * 60;'
         - switch.turn_off: zone_2
-    turn_off_action:
+    turn_off_action: 
       then:
         - switch.turn_off: valve_2
   - platform: template
     id: zone_3
-    name: 'Zone 3'
-    icon: 'mdi:sprinkler-variant'
+    name: "Zone 3"
+    icon: "mdi:sprinkler-variant"
     lambda: |-
       return id(valve_3).state;
-    turn_on_action:
+    turn_on_action: 
       then:
-        - if:
+        - if: 
             condition:
               - switch.is_on: valve_3_enabled
             then:
               - number.set:
                   id: valve_3_duration
-                  value: !lambda 'return id(zone_3_duration).state;'
+                  value: !lambda "return id(zone_3_duration).state;"
               - switch.turn_on: valve_3
-        - delay: !lambda 'return id(zone_3_duration).state * 1000;'
+        - delay: !lambda 'return id(zone_3_duration).state * 1000 * 60;'
         - switch.turn_off: zone_3
-    turn_off_action:
+    turn_off_action: 
       then:
         - switch.turn_off: valve_3
   - platform: template
     id: zone_4
-    name: 'Zone 4'
-    icon: 'mdi:sprinkler-variant'
+    name: "Zone 4"
+    icon: "mdi:sprinkler-variant"
     lambda: |-
       return id(valve_4).state || id(valve_5).state;
-    turn_on_action:
+    turn_on_action: 
       then:
-        - if:
+        - if: 
             condition:
               - switch.is_on: valve_4_enabled
             then:
               - number.set:
                   id: valve_4_duration
-                  value: !lambda 'return id(zone_4_duration).state;'
+                  value: !lambda "return id(zone_4_duration).state;"
               - switch.turn_on: valve_4
         - if:
             condition:
@@ -651,29 +655,29 @@ switch:
             then:
               - number.set:
                   id: valve_5_duration
-                  value: !lambda 'return id(zone_4_duration).state;'
+                  value: !lambda "return id(zone_4_duration).state;"
               - switch.turn_on: valve_5
-        - delay: !lambda 'return id(zone_4_duration).state * 1000;'
+        - delay: !lambda 'return id(zone_4_duration).state * 1000 * 60;'
         - switch.turn_off: zone_4
-    turn_off_action:
+    turn_off_action: 
       then:
         - switch.turn_off: valve_4
         - switch.turn_off: valve_5
   - platform: template
     id: zone_5
-    name: 'Zone 5'
-    icon: 'mdi:sprinkler-variant'
+    name: "Zone 5"
+    icon: "mdi:sprinkler-variant"
     lambda: |-
       return id(valve_6).state || id(valve_7).state;
-    turn_on_action:
+    turn_on_action: 
       then:
-        - if:
+        - if: 
             condition:
               - switch.is_on: valve_6_enabled
             then:
               - number.set:
                   id: valve_6_duration
-                  value: !lambda 'return id(zone_5_duration).state;'
+                  value: !lambda "return id(zone_5_duration).state;"
               - switch.turn_on: valve_6
         - if:
             condition:
@@ -681,11 +685,11 @@ switch:
             then:
               - number.set:
                   id: valve_7_duration
-                  value: !lambda 'return id(zone_5_duration).state;'
+                  value: !lambda "return id(zone_5_duration).state;"
               - switch.turn_on: valve_7
-        - delay: !lambda 'return id(zone_5_duration).state * 1000;'
+        - delay: !lambda 'return id(zone_5_duration).state * 1000 * 60;'
         - switch.turn_off: zone_5
-    turn_off_action:
+    turn_off_action: 
       then:
         - switch.turn_off: valve_6
         - switch.turn_off: valve_7
@@ -693,76 +697,106 @@ switch:
   # Zones Enabled
   - platform: template
     id: zone_1_enabled
-    name: 'Zone 1 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Zone 1 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: zone_2_enabled
-    name: 'Zone 2 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Zone 2 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: zone_3_enabled
-    name: 'Zone 3 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Zone 3 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: zone_4_enabled
-    name: 'Zone 4 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Zone 4 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
   - platform: template
     id: zone_5_enabled
-    name: 'Zone 5 aktiv'
-    icon: 'mdi:check-circle-outline'
+    name: "Zone 5 aktiv"
+    icon: "mdi:check-circle-outline"
     optimistic: True
+    restore_mode: RESTORE_DEFAULT_ON
 
-  # Automation
+  # Programm
   - platform: template
-    id: automation
-    name: 'Automation'
-    icon: 'mdi:robot'
+    id: program
+    name: "Programm"
+    icon: "mdi:robot"
     #lambda: |-
     #  return id(zone_1).state || id(zone_2).state || id(zone_3).state || id(zone_4).state || id(zone_5).state;
     optimistic: True
-    turn_on_action:
+    turn_on_action: 
       then:
+        - delay: 1s # Initial delay required for potential immediate shutdown
         - if:
             condition:
-              - switch.is_on: zone_1_enabled
+              - switch.is_on: program_enabled
             then:
-              - switch.turn_on: zone_1
-              - delay: !lambda 'return id(zone_1_duration).state * 1000;'
-              - delay: $valve_open_delay
-        - if:
-            condition:
-              - switch.is_on: zone_2_enabled
-            then:
-              - switch.turn_on: zone_2
-              - delay: !lambda 'return id(zone_2_duration).state * 1000;'
-              - delay: $valve_open_delay
-        - if:
-            condition:
-              - switch.is_on: zone_3_enabled
-            then:
-              - switch.turn_on: zone_3
-              - delay: !lambda 'return id(zone_3_duration).state * 1000;'
-              - delay: $valve_open_delay
-        - if:
-            condition:
-              - switch.is_on: zone_4_enabled
-            then:
-              - switch.turn_on: zone_4
-              - delay: !lambda 'return id(zone_4_duration).state * 1000;'
-              - delay: $valve_open_delay
-        - if:
-            condition:
-              - switch.is_on: zone_5_enabled
-            then:
-              - switch.turn_on: zone_5
-              - delay: !lambda 'return id(zone_5_duration).state * 1000;'
-        - switch.turn_off: automation
-    turn_off_action:
+              - if:
+                  condition:
+                    - switch.is_on: zone_1_enabled
+                  then:
+                    - switch.turn_on: zone_1
+                    - delay: 1s
+                    #- delay: !lambda "return id(zone_1_duration).state * 1000 * 60;"
+                    - wait_until:
+                        condition:
+                          - switch.is_off: zone_1
+                    - delay: $valve_open_delay
+              - if:
+                  condition:
+                    - switch.is_on: zone_2_enabled
+                  then:
+                    - switch.turn_on: zone_2
+                    - delay: 1s
+                    #- delay: !lambda "return id(zone_2_duration).state * 1000 * 60;"
+                    - wait_until:
+                        condition:
+                          - switch.is_off: zone_2
+                    - delay: $valve_open_delay
+              - if:
+                  condition:
+                    - switch.is_on: zone_3_enabled
+                  then:
+                    - switch.turn_on: zone_3
+                    - delay: 1s
+                    #- delay: !lambda "return id(zone_3_duration).state * 1000 * 60;"
+                    - wait_until:
+                        condition:
+                          - switch.is_off: zone_3
+                    - delay: $valve_open_delay
+              - if:
+                  condition:
+                    - switch.is_on: zone_4_enabled
+                  then:
+                    - switch.turn_on: zone_4
+                    - delay: 1s
+                    #- delay: !lambda "return id(zone_4_duration).state * 1000;"
+                    - wait_until:
+                        condition:
+                          - switch.is_off: zone_4
+                    - delay: $valve_open_delay
+              - if:
+                  condition:
+                    - switch.is_on: zone_5_enabled
+                  then:
+                    - switch.turn_on: zone_5
+                    - delay: 1s
+                    #- delay: !lambda "return id(zone_5_duration).state * 1000;"
+                    - wait_until:
+                        condition:
+                          - switch.is_off: zone_5
+        - switch.turn_off: program
+    turn_off_action: 
       then:
         - switch.turn_off: zone_1
         - switch.turn_off: zone_2
@@ -770,12 +804,19 @@ switch:
         - switch.turn_off: zone_4
         - switch.turn_off: zone_5
 
+  # Programm Enabled
+  - platform: template
+    id: program_enabled
+    name: "Programm aktiv"
+    icon: "mdi:check-circle-outline"
+    optimistic: True
+
 number:
   # Sprinkler Durations
   - platform: template
-    name: 'Sprenger 1 Dauer'
+    name: "Sprenger 1 Dauer"
     id: valve_1_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -783,9 +824,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 2 Dauer'
+    name: "Sprenger 2 Dauer"
     id: valve_2_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -793,9 +834,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 3 Dauer'
+    name: "Sprenger 3 Dauer"
     id: valve_3_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -803,9 +844,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 4 Dauer'
+    name: "Sprenger 4 Dauer"
     id: valve_4_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -813,9 +854,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 5 Dauer'
+    name: "Sprenger 5 Dauer"
     id: valve_5_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -823,9 +864,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 6 Dauer'
+    name: "Sprenger 6 Dauer"
     id: valve_6_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -833,9 +874,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 7 Dauer'
+    name: "Sprenger 7 Dauer"
     id: valve_7_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -843,9 +884,9 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Sprenger 8 Dauer'
+    name: "Sprenger 8 Dauer"
     id: valve_8_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -855,19 +896,19 @@ number:
 
   # Zone Durations
   - platform: template
-    name: 'Zone 1 Dauer'
+    name: "Zone 1 Dauer"
     id: zone_1_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
-    initial_value: 20
+    initial_value: 15
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Zone 2 Dauer'
+    name: "Zone 2 Dauer"
     id: zone_2_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
@@ -875,33 +916,33 @@ number:
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Zone 3 Dauer'
+    name: "Zone 3 Dauer"
     id: zone_3_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
-    initial_value: 20
+    initial_value: 15
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Zone 4 Dauer'
+    name: "Zone 4 Dauer"
     id: zone_4_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
-    initial_value: 20
+    initial_value: 15
     step: 1
     unit_of_measurement: min
   - platform: template
-    name: 'Zone 5 Dauer'
+    name: "Zone 5 Dauer"
     id: zone_5_duration
-    icon: 'mdi:timer'
+    icon: "mdi:timer"
     optimistic: true
     min_value: 1
     max_value: $max_runtime
-    initial_value: 20
+    initial_value: 30
     step: 1
     unit_of_measurement: min
 ```
@@ -933,3 +974,21 @@ This would allow a valve to be shut down before the end of the zone's runtime:
 The automation now also respects each zone's enabled status. Together with the same mechanism in each of the zones this setup is super flexible and allows for the automation to only open the valves you want it to.
 
 ### The Hardware
+
+With the software part figured out it was time to apply it to the real world:
+
+![Hardware](hardware.jpg 'Hardware')
+
+Let's walk through it left to right:
+
+A the very left bottom there's the 2-wired 230V cable coming into the box. It feeds to both a 24VAC and a 5VDC transformer. The former powers the valves, the latter is for powering the board.
+
+Next up is the board itself. It has a 5VDC as well as a 7-30VDC input, an ESP32 with pinouts for easy flashing and 8 relays.
+
+Last but not least in the right side is the 9 wired cable (8 valves plus ground) connected to the valve box.
+
+To save on cables and connectors I simply bridged all the relais' common ports.
+
+### Conclusion
+
+It took a lot of planning for the hardware and even more trial and error to get the software exactly how I wanted it to behave. However, all this work has paid off massively because not only is the wiring a little simpler than what I had before but having all of the controls on a single board is tremendously beneficial and SO much cleaner when it comes to controlling it with Home Assistant.
