@@ -973,6 +973,23 @@ This would allow a valve to be shut down before the end of the zone's runtime:
 
 The automation now also respects each zone's enabled status. Together with the same mechanism in each of the zones this setup is super flexible and allows for the automation to only open the valves you want it to.
 
+#### Edit 2024-07-23
+
+Unfortunately I realized that the current status of the "active" switches is not always properly reflected in Home Assistant. Pretty regularly the controller would lose its connection to HA which caused the values for all "active" switches to be set to their default. This in turn resulted in the automatic program to mostly not run at all - not very desirable. I tried different methods like connecting the switch to a GPIO and setting a `restore_mode` like this:
+
+```yaml
+  - platform: gpio
+    id: program_enabled
+    name: "Programm aktiv"
+    icon: "mdi:check-circle-outline"
+    pin: GPIO16
+    restore_mode: RESTORE_DEFAULT_OFF
+```
+
+However, that only resulted in the switch being constantly on with no way of turning it off for some reason.
+
+**Solution:** Since I wanted to keep it simple, I created an input boolean in Home Assistant which now keeps track of whether the program is active or not.
+
 ### The Hardware
 
 With the software part figured out it was time to apply it to the real world:
