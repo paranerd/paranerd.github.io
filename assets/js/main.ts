@@ -6,21 +6,31 @@ document.addEventListener(
   'DOMContentLoaded',
   () => {
     const header = document.getElementsByTagName('header')[0];
-    const mastheadHomepage = document.getElementById('masthead-homepage');
-    const mastheadSubtitle = document.getElementById('masthead-subtitle');
     const skillBars = document.getElementsByClassName('skill-bar');
+    const parallax = document.querySelectorAll('.parallax') as NodeListOf<HTMLElement>;
 
-    if (mastheadHomepage && mastheadSubtitle && window.scrollY === 0) {
-      mastheadHomepage.classList.add('fadeInUp');
-      mastheadSubtitle.classList.add('fadeIn');
+    if (window.scrollY === 0) {
+      const fadeInUp = document.querySelectorAll('.do-fade-in-up') as NodeListOf<HTMLElement>;
+
+      fadeInUp.forEach((el) => {
+        el.classList.add('fade-in-up');
+      });
+    
+      const fadeInOut = document.querySelectorAll('.do-fade-in-out') as NodeListOf<HTMLElement>;
+  
+      fadeInOut.forEach((el) => {
+        el.classList.add('fade-in-out');
+      });
     }
 
     window.addEventListener('scroll', () => {
-      if (mastheadHomepage) {
-        mastheadHomepage.style.opacity = String(
-          1 - window.scrollY / (window.innerHeight / 2)
-        );
-        mastheadHomepage.style.marginTop = -window.scrollY / 2 + 'px';
+      if (parallax.length) {
+        parallax.forEach((el) => {
+          el.style.opacity = String(
+            1 - window.scrollY / (window.innerHeight / 2)
+          );
+          el.style.marginTop = -window.scrollY / 2 + 'px';
+        });
       }
 
       if (window.scrollY > 0) {

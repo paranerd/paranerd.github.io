@@ -1,5 +1,5 @@
-<div id="masthead-section">
-  <h1>{{ $.Page.Title }}</h1>
+<div class="masthead masthead-section">
+  <h1 class='{{ if eq $.Page.Kind "page" }}masthead-dark-bg{{ end }}'>{{ $.Page.Title }}</h1>
 
   {{ with .Resources.GetMatch "header.*" }}
   {{ $src := printf "data:%s;base64,%s" .MediaType.Type (.Content | base64Encode) }}
