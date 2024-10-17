@@ -20,7 +20,7 @@ But wait! I think there may be a better solution! A solution that comes with imp
 
 Enter: The JAMStack and Static Site Generators!
 
-## What is the JAMStack?
+### What is the JAMStack?
 
 As a developer you may know about the LAMP Stack (Linux, Apache, MySQL and PHP) - which is actually how I started as a Full Stack Developer. I then switched over to the MEAN Stack (MongoDB, Express, Angular, Node) while many may prefer the MERN Stack (using React instead of Angular).
 
@@ -28,7 +28,7 @@ Every one of those stacks work just fine and they all come with their own pros a
 
 The term "JAMStack" was first coined by Matt Biilmann in 2015. JAM stands for: JavaScript, APIs and Markdown. Typically you would add some HTML and CSS but that's not strictly necessary.
 
-## What is a Static Site Generator?
+### What is a Static Site Generator?
 
 A static site generator (SSG) is a tool that generates a full static HTML website based on raw data and a set of templates. Essentially you build your HTML, CSS and JavaScript once, add some content in the form of Markdown files and let the SSG handle all the building, rendering and routing.
 
@@ -36,7 +36,7 @@ There are many different flavors of SSGs. From those that I would call "strictly
 
 All those flavors have at least one thing in common though: They take your code and content, bundle it up and serve it as a static website
 
-## Advantages of Static Site Generators
+### Advantages of Static Site Generators
 
 1. **Backups and Disaster Recovery**
 
@@ -80,7 +80,7 @@ GitHub Pages / Cloudflare Pages: also free
 
 Enough said.
 
-## Disadvantages of Static Site Generators
+### Disadvantages of Static Site Generators
 
 1. **Ease of use**
 
@@ -92,7 +92,7 @@ Once you have the site itself built, adding more content is smooth sailing but t
 
 Coming from the WordPress universe where it only takes a couple of clicks to add more functionality to your website it's going to be a shock entering the world of SSGs. There is no dashboard, no curated catalog of extensions, no click-and-deploy way of doing things. It's all just code, for better and for worse.
 
-## Some Examples
+### Some Examples
 
 I mentioned in the beginning that there are lots of flavors to choose from when it comes to Static Site Generators. Here is a (very short) list of some that I checked out on my journey
 
@@ -120,6 +120,6 @@ MkDocs is one of the more specialized flavors. While you can basically build any
 
 From a complexity perspective this is even easier to get into than all the other ones. Their own documentation is on point, getting started was as smooth as it could have been.
 
-## Conclusion
+### Conclusion
 
 If you're tired of overly complex setups for what is supposed to be just a simple web page, you're looking for unrivaled speed and security or you're just curious to try out something new: Static Site Generators may just be what you're looking for!
