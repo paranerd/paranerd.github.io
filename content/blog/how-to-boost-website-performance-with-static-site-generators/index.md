@@ -60,7 +60,7 @@ To really get my point across, here are my Lighthouse scores of this website bot
 
 and now using Hugo on Cloudflare Pages
 
-![Lighthouse Scores after](lighthouse-scores-before.png 'Lighthouse Scores after')
+![Lighthouse Scores after](lighthouse-scores-after.png 'Lighthouse Scores after')
 
 3. **Security**
 
