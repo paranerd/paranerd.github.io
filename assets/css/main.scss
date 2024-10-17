@@ -222,16 +222,13 @@ main {
   h1 {
     padding: 30px 30px;
     font-family: 'Montserrat', Arial;
-    font-size: 2.5rem;
+    font-size: clamp(2.5rem, 7vw, 3rem);
     color: #fff;
 
-    &.masthead-dark-bg {
+    &.masthead-title-single {
       border-radius: 5px;
       background: rgba(0, 0, 0, 0.3);
-    }
-
-    @media only screen and (min-width: $bp-large) {
-      font-size: 3rem;
+      font-size: clamp(1.5rem, 7vw, 3rem);
     }
   }
 
