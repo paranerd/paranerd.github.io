@@ -10,11 +10,11 @@ Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der V
 
 ### Verantwortlicher
 
-{{< env "HUGO_NAME" >}}<br />
+{{< env key="HUGO_NAME" linebreak=true >}}
 
-{{< env "HUGO_STREET" >}}<br />
+{{< env key="HUGO_STREET" linebreak=true >}}
 
-{{< env "HUGO_CITY" >}}<br />
+{{< env key="HUGO_CITY" linebreak=true >}}
 
 paranerd.development@gmail.com
 

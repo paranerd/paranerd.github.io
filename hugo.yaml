@@ -3,7 +3,8 @@ languageCode: 'en-us'
 title: 'The German Coder'
 sectionPagesMenu: main
 summaryLength: 50
-paginate: 10
+pagination:
+  pagerSize: 10
 markup:
   tableOfContents:
     startLevel: 2
