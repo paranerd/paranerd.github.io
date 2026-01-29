@@ -1,4 +1,3 @@
-{{ $variables := resources.Get "css/variables.scss" }}
 {{ $copyCode := resources.Get "css/copy-code.scss" }}
 {{ $gridList := resources.Get "css/grid-list.scss" }}
 {{ $pagination := resources.Get "css/pagination.scss" }}
@@ -7,7 +6,7 @@
 {{ $search := resources.Get "css/search.scss" }}
 {{ $main := resources.Get "css/main.scss" }}
 
-{{ $css := slice $variables $copyCode $gridList $pagination $filter $navIcon $search $main | resources.Concat "css/bundle.scss" | toCSS | minify |
+{{ $css := slice $copyCode $gridList $pagination $filter $navIcon $search $main | resources.Concat "css/bundle.scss" | toCSS | minify |
 fingerprint }}
 
 <link
